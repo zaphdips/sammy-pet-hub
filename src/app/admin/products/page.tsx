@@ -15,7 +15,7 @@ import styles from "../pets/PetsManagement.module.css"; // Re-use admin table st
 
 const EMPTY_FORM = {
   name: "", category: "toy", sub_category: "", target_pet: "all", price: "", discount_price: "",
-  description: "", manufacturer: "", photo_urls: [],
+  description: "", manufacturer: "", photo_urls: [] as string[],
   medication_form: "", toy_material: "", health_benefit: ""
 };
 
