@@ -1,0 +1,146 @@
+.main {
+  padding: 140px 5% 100px;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.paper {
+  background: white;
+  border-radius: 40px;
+  padding: 80px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.05);
+  border: 1px solid #f1f5f9;
+}
+
+.header {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 3.5rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #166534 0%, #2e7d32 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.lastUpdated {
+  color: #94a3b8;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.section {
+  margin-bottom: 56px;
+  padding-bottom: 56px;
+  border-bottom: 1.5px solid #f1f5f9;
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.iconBox {
+  width: 44px;
+  height: 44px;
+  background-color: #f0fdf4;
+  color: var(--primary-green);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section h2 {
+  font-size: 1.5rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.section p, .section li {
+  color: #475569;
+  line-height: 1.9;
+  font-size: 1.1rem;
+}
+
+.section ul {
+  padding-left: 0;
+  list-style: none;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section ul li {
+  padding-left: 32px;
+  position: relative;
+}
+
+.section ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--primary-green);
+  font-weight: 900;
+}
+
+/* Table Styles */
+.tableWrapper {
+  overflow-x: auto;
+  margin: 32px 0;
+  border-radius: 20px;
+  border: 1.5px solid #f1f5f9;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #f8fafc;
+}
+
+.table th {
+  background-color: #f1f5f9;
+  padding: 20px;
+  text-align: left;
+  font-weight: 800;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.05em;
+}
+
+.table td {
+  padding: 20px;
+  border-top: 1.5px solid #f1f5f9;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .paper {
+    padding: 40px 24px;
+    border-radius: 24px;
+  }
+  .header h1 {
+    font-size: 2.5rem;
+  }
+}

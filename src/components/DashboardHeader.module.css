@@ -1,0 +1,132 @@
+.header {
+  height: 80px;
+  background: white;
+  border-bottom: 1px solid #f1f5f9;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  background: #f8fafc;
+  padding: 10px 20px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  gap: 12px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+.searchBar:focus-within {
+  background: white;
+  border-color: var(--primary-green);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.searchIcon {
+  color: #94a3b8;
+}
+
+.searchBar input {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #1e293b;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.iconBtn, .cartBtn {
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.iconBtn:hover, .cartBtn:hover {
+  background: #f1f5f9;
+  color: var(--primary-green);
+}
+
+.dot {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  background: var(--accent-orange);
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.badge {
+  position: absolute;
+  top: 6px;
+  right: 4px;
+  background: var(--primary-green);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--primary-green), #22c55e);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.menuBtn {
+  display: none;
+  background: none;
+  border: none;
+  color: #1e293b;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .header {
+    padding: 0 20px;
+  }
+  .menuBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+  }
+  .searchBar {
+    display: none;
+  }
+}

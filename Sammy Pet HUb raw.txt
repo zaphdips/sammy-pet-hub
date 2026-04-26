@@ -1,0 +1,54 @@
+Sammy Pet HUb
+
+
+Features
+
+1 General search bar
+2. Get your pet as menu cards
+3. Filter (Pet type, if select dog then dog breed list, age, gender) can add more in admin 
+4. Request pet if not among listed option
+5. Dog toys with filter also in buy option
+6. Pet medication with filters
+7. Get pet entangled - pair up your dog for mating with filter
+8. Request vet assistance or consultation clicking leads to WhatsApp or email or other options selected( in admin portal these social contacts are added and can be changed 
+9. Notif bar for normal account profile showing notification for some key activities
+10. also member account should have profile with orders menu showing the past orders made with status completed, processing and other options you term good
+11. Tracking should show key information plus order id with time of expectation based on distance(maybe set by admin and counter active)
+
+ADMIN
+
+1. Addition to filter types and categories
+2. Update contact info
+3. Can add dog toys and group according to right filters like name of manufacturer 
+4. can add more dog medication with more information add and maybe types like pills, liquid and also grouped according to pet
+5. can post add for mating match
+6. update opening an d closing time
+7. run discounts for all products (price discount toggle with %)
+
+ANIMATION/IMAGE
+
+pets playing silly in a garden with butterflies around write up get your FUR-ever companion.
+
+ADDITION
+
+For request vet they select pet type then (if dog) select breed and then reason for request where they type in..links to any social they select 
+
+A segment showing pet breeds...for now just dogs shown this will be scrollable to the left or right
+
+pictures with an about info about the dog breeds...admin can edit this and add more including images of the pets 
+
+
+IS YOUR PET ACTION STRANGE (Symptoms and signs of illness in pet)
+
+pictures of sick pet with physical signs or symptoms circled)
+
+then explanation and TYPE OF ILLNESS
+
+A button saying request medical assistance linking back to request pet 
+
+
+
+
+ABOUT
+
+Cat with starry cute eyes big banner then writeup of Sammy hub as a place for everything relating to pets and then get a FUR-ever companion 

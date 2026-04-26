@@ -1,0 +1,344 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  color: var(--saas-text-main);
+  letter-spacing: -0.02em;
+}
+
+.header p {
+  color: var(--saas-text-muted);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.uptime {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--saas-accent-soft);
+  color: var(--saas-accent);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+/* Stats Grid SaaS */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.statCard {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid var(--saas-border);
+  box-shadow: var(--saas-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--saas-shadow-md);
+}
+
+.iconBox {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  background: var(--saas-bg);
+  color: var(--saas-text-main);
+  border: 1px solid var(--saas-border);
+}
+
+.statInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.statInfo span {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--saas-text-muted);
+}
+
+.statInfo h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  color: var(--saas-text-main);
+  margin-top: 4px;
+}
+
+/* Quick Commands SaaS */
+.quickCommands {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.commandBtn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: white;
+  border: 1px solid var(--saas-border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  color: var(--saas-text-main);
+  text-decoration: none;
+  font-size: 0.9rem;
+  box-shadow: var(--saas-shadow);
+}
+
+.commandBtn:hover {
+  background: var(--saas-bg);
+  border-color: var(--saas-border-bold);
+}
+
+.commandBtn svg {
+  color: var(--saas-text-muted);
+}
+
+/* Panels SaaS */
+.mainGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.panel {
+  background: white;
+  padding: 28px;
+  border-radius: 12px;
+  border: 1px solid var(--saas-border);
+  box-shadow: var(--saas-shadow);
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.panelTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.panelTitle svg {
+  color: var(--saas-accent);
+}
+
+.panelTitle h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  color: var(--saas-text-main);
+}
+
+.panelBadge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--saas-text-muted);
+  background: var(--saas-bg);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--saas-border);
+}
+
+/* Settings Panel SaaS */
+.settingsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.settingRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--saas-border);
+}
+
+.settingRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.rowInfo label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--saas-text-main);
+  text-transform: capitalize;
+  margin-bottom: 4px;
+}
+
+.rowInfo p {
+  font-size: 0.8rem;
+  color: var(--saas-text-muted);
+  line-height: 1.4;
+}
+
+.rowInput input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--saas-border-bold);
+  background: white;
+  color: var(--saas-text-main);
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.rowInput input:focus {
+  border-color: var(--saas-text-main);
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
+}
+
+.emptyRow {
+  padding: 40px !important;
+  text-align: center;
+  color: var(--saas-text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* SaaS Mini Table */
+.miniTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.miniTable th {
+  text-align: left;
+  font-size: 0.75rem;
+  color: var(--saas-text-muted);
+  text-transform: uppercase;
+  padding: 0 12px 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--saas-border);
+}
+
+.miniTable td {
+  padding: 14px 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--saas-text-main);
+  border-bottom: 1px solid var(--saas-border);
+}
+
+.miniTable tr:last-child td {
+  border-bottom: none;
+}
+
+.miniTable tr:hover td {
+  background: var(--saas-bg);
+}
+
+.miniStatus {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.miniStatus.processing { background: #fef9c3; color: #a16207; }
+.miniStatus.shipped { background: #dbeafe; color: #1e40af; }
+.miniStatus.delivered { background: #dcfce7; color: #15803d; }
+.miniStatus.cancelled { background: #fee2e2; color: #b91c1c; }
+
+.viewAllBtn {
+  background: none;
+  border: none;
+  color: var(--saas-accent);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.viewAllBtn:hover {
+  color: #059669;
+  text-decoration: underline;
+}
+
+/* Health Items SaaS */
+.healthList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.healthItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--saas-bg);
+  border-radius: 8px;
+  border: 1px solid var(--saas-border);
+  font-size: 0.9rem;
+}
+
+.statusPill {
+  padding: 4px 10px;
+  background: var(--saas-accent-soft);
+  color: var(--saas-accent);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.loader {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #94a3b8;
+  font-family: 'Outfit', sans-serif;
+}
+
+@media (max-width: 1200px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+}

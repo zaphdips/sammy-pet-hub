@@ -1,0 +1,220 @@
+.main {
+  padding: 120px 5% 100px;
+  min-height: 100vh;
+}
+
+/* ─── Hero Section ───────────────────────────── */
+.heroSection {
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.heroContent {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: var(--primary-light);
+  color: var(--primary-green);
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+
+.heroContent h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.heroContent p {
+  font-size: 1.2rem;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.heroImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+}
+
+.heroImage {
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+/* ─── Stats Section ──────────────────────────── */
+.statsSection {
+  max-width: 1200px;
+  margin: 0 auto 80px;
+}
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.statCard {
+  padding: 32px 20px;
+  text-align: center;
+  border-radius: 24px;
+  background: white;
+}
+
+.statCard h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--primary-green);
+  margin-bottom: 8px;
+}
+
+.statCard p {
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+}
+
+/* ─── Content Section ────────────────────────── */
+.contentSection {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.contentText h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+
+.contentText p {
+  font-size: 1.1rem;
+  color: #475569;
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.featureList li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.checkIcon {
+  color: var(--primary-green);
+  flex-shrink: 0;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 32px;
+  background-color: var(--primary-green);
+  color: white;
+  border-radius: 16px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.ctaBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
+}
+
+.contentVisual {
+  position: relative;
+  height: 500px;
+}
+
+.imageBox {
+  position: absolute;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.box1 {
+  width: 70%;
+  height: 70%;
+  top: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.box2 {
+  width: 60%;
+  height: 60%;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.coverImage {
+  object-fit: cover;
+}
+
+.placeholderBg {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary-green) 0%, #10b981 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Responsive ─────────────────────────────── */
+@media (max-width: 900px) {
+  .contentSection {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .contentVisual {
+    height: 400px;
+    margin-top: 40px;
+  }
+  
+  .heroContent h1 {
+    font-size: 3rem;
+  }
+}

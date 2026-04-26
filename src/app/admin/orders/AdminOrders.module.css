@@ -1,0 +1,190 @@
+.container {
+  max-width: 1200px;
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  color: var(--saas-text-main);
+  letter-spacing: -0.02em;
+}
+
+.header p {
+  color: var(--saas-text-muted);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.tableWrapper {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--saas-border);
+  box-shadow: var(--saas-shadow);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: left;
+  padding: 16px 20px;
+  background-color: var(--saas-bg);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--saas-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--saas-border);
+}
+
+.table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--saas-border);
+  vertical-align: middle;
+  color: var(--saas-text-main);
+  font-size: 0.9rem;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tr:hover td {
+  background-color: var(--saas-bg);
+}
+
+.idTag {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  color: var(--saas-text-main);
+  font-size: 0.85rem;
+}
+
+.customerInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.customerInfo strong {
+  font-size: 0.9rem;
+  color: var(--saas-text-main);
+}
+
+.customerInfo span {
+  font-size: 0.8rem;
+  color: var(--saas-text-muted);
+}
+
+.statusBadge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.statusBadge.processing { background: #fef9c3; color: #a16207; }
+.statusBadge.shipped { background: #dbeafe; color: #1e40af; }
+.statusBadge.delivered { background: #dcfce7; color: #15803d; }
+.statusBadge.cancelled { background: #fee2e2; color: #b91c1c; }
+
+.quickActions {
+  display: flex;
+  gap: 8px;
+}
+
+.shipBtn, .deliverBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border: 1px solid var(--saas-border-bold);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+  color: var(--saas-text-main);
+}
+
+.shipBtn:hover, .deliverBtn:hover {
+  background: var(--saas-bg);
+  border-color: var(--saas-text-main);
+}
+
+.trackingNum {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  color: var(--saas-text-main);
+  font-size: 0.85rem;
+  background: var(--saas-bg);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.genBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: white;
+  border: 1px solid var(--saas-border-bold);
+  color: var(--saas-text-muted);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.genBtn:hover {
+  border-color: var(--saas-text-main);
+  color: var(--saas-text-main);
+}
+
+.viewBtn {
+  padding: 6px 12px;
+  background: white;
+  color: var(--saas-text-main);
+  border: 1px solid var(--saas-border-bold);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.viewBtn:hover {
+  background: var(--saas-text-main);
+  color: white;
+  border-color: var(--saas-text-main);
+}
+
+.loader {
+  padding: 80px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--saas-text-muted);
+  font-size: 1.1rem;
+}
+
+.txRef {
+  display: block;
+  font-size: 0.7rem;
+  font-family: monospace;
+  color: var(--saas-text-muted);
+  background: var(--saas-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 4px;
+  border: 1px solid var(--saas-border);
+}

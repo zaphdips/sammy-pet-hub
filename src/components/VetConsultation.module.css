@@ -1,0 +1,155 @@
+.section {
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: var(--shadow-premium);
+}
+
+.infoSide {
+  padding: 60px;
+  background-color: var(--primary-green);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.badge {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  width: fit-content;
+  margin-bottom: 24px;
+}
+
+.infoSide h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.infoSide p {
+  opacity: 0.9;
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+}
+
+.stats {
+  display: flex;
+  gap: 40px;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.statItem strong {
+  font-size: 1.8rem;
+  font-family: 'Outfit', sans-serif;
+}
+
+.statItem span {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.formSide {
+  padding: 60px;
+  background-color: white;
+}
+
+.inputGroup {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputGroup label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+.select, .input, .textarea {
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  font-size: 1rem;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.select:focus, .input:focus, .textarea:focus {
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+}
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.whatsappBtn {
+  background-color: #25d366;
+  color: white;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.whatsappBtn:hover {
+  background-color: #128c7e;
+  transform: translateY(-2px);
+}
+
+.emailBtn {
+  background-color: var(--text-dark);
+  color: white;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.emailBtn:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 968px) {
+  .card {
+    grid-template-columns: 1fr;
+  }
+  
+  .infoSide, .formSide {
+    padding: 40px;
+  }
+  
+  .actions {
+    grid-template-columns: 1fr;
+  }
+}

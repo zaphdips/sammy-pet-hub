@@ -1,0 +1,11 @@
+.header { margin-bottom: 40px; }
+.header h1 { font-size: 2rem; font-family: 'Outfit', sans-serif; }
+.header p { color: var(--text-muted); }
+.tableWrapper { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+.table { width: 100%; border-collapse: collapse; text-align: left; }
+.table th { padding: 20px; background-color: #f8f9fa; font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted); }
+.table td { padding: 20px; border-bottom: 1px solid #f0f0f0; }
+.adminBadge { background-color: var(--accent-light); color: var(--accent-orange); padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 700; }
+.userBadge { background-color: var(--primary-light); color: var(--primary-green); padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 700; }
+.promoteBtn { background-color: var(--primary-green); color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; }
+.revokeBtn { background-color: #ff5252; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; }

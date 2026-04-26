@@ -1,0 +1,281 @@
+.dashboard {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+.loader {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--primary-green);
+}
+
+/* Hot Sale Banner */
+.hotSale {
+  height: 350px;
+  border-radius: 40px;
+  padding: 60px;
+  background: linear-gradient(135deg, #166534 0%, #2e7d32 100%);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(46, 125, 50, 0.15);
+}
+
+.saleContent {
+  max-width: 500px;
+  z-index: 2;
+}
+
+.saleBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 24px;
+}
+
+.mascotFrame {
+  width: 260px;
+  height: 260px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  animation: float 5s ease-in-out infinite;
+  overflow: hidden; /* This will help clip the image */
+}
+
+.mascotImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This makes the dog fill the circle perfectly */
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@media (max-width: 900px) {
+  .hotSale {
+    height: auto;
+    padding: 40px;
+    text-align: center;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .saleContent h1 {
+    font-size: 2.5rem;
+  }
+  .saleImage {
+    justify-content: center;
+  }
+}
+
+.saleContent h1 {
+  font-size: 3.5rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+
+.saleContent p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 32px;
+}
+
+.saleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 32px;
+  background: white;
+  color: #166534;
+  border-radius: 16px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.saleBtn:hover {
+  transform: translateX(5px);
+}
+
+.sparkleIcon {
+  color: rgba(255,255,255,0.1);
+}
+
+/* Section Styles */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.titleWithIcon {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sectionIcon {
+  color: var(--primary-green);
+  width: 28px;
+  height: 28px;
+}
+
+.section h2 {
+  font-size: 1.8rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.viewAll {
+  color: var(--primary-green);
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+.horizontalScroll {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding: 10px 0 30px;
+  scrollbar-width: none; /* Hide scrollbar for clean look */
+}
+
+.horizontalScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.cardWrap {
+  flex: 0 0 320px;
+  transition: transform 0.3s ease;
+}
+
+.cardWrap:hover {
+  transform: translateY(-10px);
+}
+
+.healthGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.healthCard {
+  padding: 32px;
+  border-radius: 24px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.3s;
+}
+
+.healthCard:hover {
+  transform: translateY(-5px);
+}
+
+.healthCard h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.healthCard p {
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.healthLink {
+  color: var(--primary-green);
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.vetCard {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 1px solid #bbf7d0;
+  position: relative;
+}
+
+.vetBadge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--primary-green);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.vetBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px;
+  background-color: var(--primary-green);
+  color: white;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  margin-top: auto;
+  transition: opacity 0.2s;
+}
+
+.vetBtn:hover {
+  opacity: 0.9;
+}
