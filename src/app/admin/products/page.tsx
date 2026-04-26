@@ -128,7 +128,7 @@ export default function AdminProducts() {
     fetchProducts();
   };
 
-  const f = (k: string, v: string) => setFormData({ ...formData, [k]: v });
+  const f = (k: string, v: any) => setFormData({ ...formData, [k]: v });
 
   return (
     <div className={styles.container}>
