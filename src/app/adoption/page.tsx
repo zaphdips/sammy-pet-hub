@@ -201,6 +201,7 @@ export default function AdoptionPage() {
               {pets.map((pet) => (
                 <PetCard 
                   key={pet.id}
+                  id={pet.id}
                   name={pet.name}
                   type={pet.type}
                   breed={pet.breed}
