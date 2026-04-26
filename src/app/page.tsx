@@ -41,11 +41,8 @@ export default function Home() {
         router.push("/dashboard");
         return; // Don't render the page for logged-in users
       }
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        const { data: profile } = await supabase.from("profiles").select("role").eq("user_id", session.user.id).single();
-        setIsAdmin(profile?.role === "admin");
-      }
+      setUser(null);
+      setIsAdmin(false);
     }
     checkSession();
 
