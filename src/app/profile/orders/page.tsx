@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
-import { Package, Truck, CheckCircle, Clock, ArrowLeft, ShoppingBag } from "lucide-react";
+import { Package, Truck, CheckCircle, Clock, ArrowLeft, ShoppingBag, Sparkles, X } from "lucide-react";
 import styles from "./Orders.module.css";
 import Link from "next/link";
 
