@@ -1,15 +1,8 @@
 "use client";
 
-/**
- * Navbar (Redesigned)
- *
- * WHY: Uses Lucide icons and a more modern, centered layout.
- * Keeps the secure role-based admin link.
- */
-
 import { useEffect, useState } from "react";
 import { supabase, checkIsAdmin } from "@/lib/supabase";
-import { User, Shield, LogOut, ChevronDown } from "lucide-react";
+import { User, Shield, LogOut, ChevronDown, Menu, X } from "lucide-react";
 import SearchBar from "./SearchBar";
 import styles from "./Navbar.module.css";
 import Link from "next/link";
@@ -17,6 +10,7 @@ import Link from "next/link";
 export default function Navbar() {
   const [user, setUser] = useState<any>(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(async ({ data: { session } }) => {
@@ -41,26 +35,39 @@ export default function Navbar() {
           <span>🐾 Sammy Hub</span>
         </Link>
 
-        <div className={styles.navLinks}>
-          <Link href="/about">About Us</Link>
-          <Link href="/adoption">Pet Sales</Link>
-          <Link href="/shop">Shop</Link>
-          <Link href="/mating">Mating Match</Link>
-          <Link href="/#vets">Vet Help</Link>
+        {/* Navigation Links */}
+        <div className={`${styles.navLinks} ${isMenuOpen ? styles.mobileOpen : ""}`}>
+          <Link href="/about" onClick={() => setIsMenuOpen(false)}>About Us</Link>
+          <Link href="/adoption" onClick={() => setIsMenuOpen(false)}>Pet Sales</Link>
+          <Link href="/shop" onClick={() => setIsMenuOpen(false)}>Shop</Link>
+          <Link href="/mating" onClick={() => setIsMenuOpen(false)}>Mating Match</Link>
+          <Link href="/#vets" onClick={() => setIsMenuOpen(false)}>Vet Help</Link>
+          
+          {/* Mobile Profile Link */}
+          {user && (
+            <Link href="/profile" className={styles.mobileOnly} onClick={() => setIsMenuOpen(false)}>
+               View My Profile
+            </Link>
+          )}
+          {!user && (
+            <Link href="/auth" className={styles.mobileOnly} onClick={() => setIsMenuOpen(false)}>
+               Sign In
+            </Link>
+          )}
         </div>
 
         <div className={styles.rightSection}>
-          <SearchBar />
+          <div className={styles.desktopSearch}><SearchBar /></div>
           
           {isAdmin && (
-            <Link href="/admin" className={styles.adminBadge}>
+            <Link href="/admin" className={`${styles.adminBadge} ${styles.hideOnMobile}`}>
               <Shield size={16} />
               <span>Admin</span>
             </Link>
           )}
 
           {user ? (
-            <Link href="/profile" className={styles.profileLink}>
+            <Link href="/profile" className={`${styles.profileLink} ${styles.hideOnMobile}`}>
               <div className={styles.avatar}>
                 {user.user_metadata?.full_name?.[0] ?? user.email?.[0]}
               </div>
@@ -69,8 +76,13 @@ export default function Navbar() {
               </span>
             </Link>
           ) : (
-            <Link href="/auth" className={styles.loginBtn}>Sign In</Link>
+            <Link href="/auth" className={`${styles.loginBtn} ${styles.hideOnMobile}`}>Sign In</Link>
           )}
+
+          {/* Mobile Toggle */}
+          <button className={styles.menuToggle} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </div>
     </nav>

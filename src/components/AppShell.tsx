@@ -20,6 +20,7 @@ import DashboardHeader from "@/components/DashboardHeader";
 import CartDrawer from "@/components/CartDrawer";
 import { CartProvider, useCart } from "@/context/CartContext";
 import { ToastProvider } from "@/components/Toast";
+import styles from "./AppShell.module.css";
 
 function ShellContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -47,22 +48,8 @@ function ShellContent({ children }: { children: React.ReactNode }) {
 
   if (loading) {
     return (
-      <div style={{ 
-        display: "flex", 
-        alignItems: "center", 
-        justifyContent: "center", 
-        minHeight: "100vh",
-        background: "var(--bg-primary, #0f172a)"
-      }}>
-        <div style={{
-          width: 40,
-          height: 40,
-          border: "3px solid rgba(255,255,255,0.1)",
-          borderTopColor: "var(--primary-green, #22c55e)",
-          borderRadius: "50%",
-          animation: "spin 0.8s linear infinite"
-        }} />
-        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      <div className={styles.loadingContainer}>
+        <div className={styles.spinner} />
       </div>
     );
   }
@@ -74,27 +61,24 @@ function ShellContent({ children }: { children: React.ReactNode }) {
   // If logged in, use the Dashboard Layout
   if (session && !isAdminPage && !isPublicPage) {
     return (
-      <div style={{ display: "flex", minHeight: "100vh", position: "relative" }}>
+      <div className={styles.dashboardWrapper}>
         {/* Responsive Sidebar */}
-        <div className={`sidebar-container ${isMobileSidebarOpen ? 'mobile-open' : ''}`}>
+        <div className={`${styles.sidebarContainer} ${isMobileSidebarOpen ? styles.mobileOpen : ''}`}>
            <DashboardSidebar />
-           {isMobileSidebarOpen && <div className="sidebar-overlay" onClick={() => setIsMobileSidebarOpen(false)}></div>}
         </div>
+        
+        {isMobileSidebarOpen && (
+          <div className={styles.sidebarOverlay} onClick={() => setIsMobileSidebarOpen(false)}></div>
+        )}
 
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0 }}>
+        <div className={styles.mainContent}>
           <DashboardHeader 
             onCartClick={openCart} 
             cartCount={cart.length} 
             onMenuClick={() => setIsMobileSidebarOpen(true)}
             userInitial={session?.user?.email?.charAt(0).toUpperCase() || "U"}
           />
-          <main style={{ 
-            flex: 1, 
-            backgroundColor: "#f8fafc", 
-            overflowY: "auto", 
-            position: "relative",
-            padding: "20px" 
-          }}>
+          <main className={styles.mainScrollArea}>
              {children}
           </main>
         </div>
@@ -104,35 +88,6 @@ function ShellContent({ children }: { children: React.ReactNode }) {
           cart={cart} 
           onRemove={removeFromCart} 
         />
-
-        <style jsx>{`
-          .sidebar-container {
-            width: 280px;
-            flex-shrink: 0;
-            transition: all 0.3s;
-          }
-          @media (max-width: 1024px) {
-            .sidebar-container {
-              position: fixed;
-              left: -280px;
-              z-index: 2000;
-              height: 100vh;
-            }
-            .sidebar-container.mobile-open {
-              left: 0;
-            }
-            .sidebar-overlay {
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100vw;
-              height: 100vh;
-              background: rgba(0,0,0,0.4);
-              backdrop-filter: blur(4px);
-              z-index: -1;
-            }
-          }
-        `}</style>
       </div>
     );
   }
