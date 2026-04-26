@@ -172,7 +172,7 @@ export default function AdminProducts() {
               {[0, 1, 2, 3, 4].map((i) => (
                 <ImageUpload 
                   key={i}
-                  bucket="products" 
+                  bucket="product-images" 
                   label={i === 0 ? "Main Photo" : `Photo ${i+1}`}
                   onUpload={(url) => {
                     const newUrls = [...(formData.photo_urls || [])];
