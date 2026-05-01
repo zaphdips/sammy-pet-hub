@@ -45,7 +45,7 @@ function ShellContent({ children }: { children: React.ReactNode }) {
   }, []);
 
   const isAdminPage = pathname?.startsWith("/admin");
-  const isPublicPage = pathname === "/about" || pathname === "/";
+  const isPublicPage = pathname === "/about" || pathname === "/" || pathname === "/dashboard";
 
   if (loading) {
     return (

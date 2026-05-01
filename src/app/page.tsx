@@ -13,12 +13,22 @@ import PromoCard from "@/components/PromoCard";
 import ScrollCarousel from "@/components/ScrollCarousel";
 import { useSiteSettings } from "@/lib/useSiteSettings";
 
+import { useRouter } from "next/navigation";
+
 export default function Home() {
   const { addToCart } = useCart();
   const { settings } = useSiteSettings();
+  const router = useRouter();
   const [previewPets, setPreviewPets] = useState<any[]>([]);
   const [previewProducts, setPreviewProducts] = useState<any[]>([]);
   const [promotions, setPromotions] = useState<any[]>([]);
+
+  // Redirect logged-in users to dashboard
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) router.replace("/dashboard");
+    });
+  }, [router]);
 
   // Read limits from site_settings (with numeric fallbacks)
   const petLimit     = parseInt(settings.homepage_pet_limit     || "4",  10);

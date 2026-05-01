@@ -62,6 +62,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { name: "Inventory",    icon: ShoppingBag,     path: "/admin/products" },
     { name: "Orders",       icon: Truck,           path: "/admin/orders" },
     { name: "Promotions",   icon: Megaphone,       path: "/admin/promotions" },
+    { name: "Categories",   icon: LayoutDashboard, path: "/admin/categories" },
     { name: "Content",      icon: BookOpen,        path: "/admin/content" },
     { name: "Filters",      icon: Settings,        path: "/admin/filters" },
     { name: "Illness Guide",icon: BookOpen,        path: "/admin/illnesses" },
