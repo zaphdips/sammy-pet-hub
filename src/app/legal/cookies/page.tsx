@@ -2,7 +2,7 @@ import { Info, Database, Eye, Mail } from "lucide-react";
 import styles from "../privacy/Legal.module.css";
 
 export const metadata = {
-  title: "Cookie Policy | Sammy Pet Hub",
+  title: "Cookie Policy | Pet Corner",
 };
 
 export default function CookiePolicy() {
@@ -58,7 +58,7 @@ export default function CookiePolicy() {
               <div className={styles.iconBox}><Mail size={20} /></div>
               <h2>4. Contact</h2>
             </div>
-            <p>privacy@sammypethub.com</p>
+            <p>privacy@petcorner.com</p>
           </section>
         </div>
       </div>

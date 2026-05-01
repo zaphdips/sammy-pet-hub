@@ -2,8 +2,8 @@ import { Heart, Stethoscope, ShieldCheck, Clock, FileText, AlertTriangle, Mail }
 import styles from "../privacy/Legal.module.css";
 
 export const metadata = {
-  title: "Pet Health Guarantee | Sammy Pet Hub",
-  description: "Comprehensive health guarantee for every pet sold through Sammy Pet Hub.",
+  title: "Pet Health Guarantee | Pet Corner",
+  description: "Comprehensive health guarantee for every pet sold through Pet Corner.",
 };
 
 export default function HealthGuaranteePage() {
@@ -22,7 +22,7 @@ export default function HealthGuaranteePage() {
               <h2>1. Our Commitment</h2>
             </div>
             <p>
-              Every pet listed on Sammy Pet Hub undergoes a mandatory health check by a certified 
+              Every pet listed on Pet Corner undergoes a mandatory health check by a certified 
               veterinarian before being listed. We guarantee that your pet is in good health and free 
               from contagious diseases at the time of sale.
             </p>
@@ -89,7 +89,7 @@ export default function HealthGuaranteePage() {
             </div>
             <p>
               For health-related inquiries or claims, please email:<br />
-              <strong>health@sammypethub.com</strong>
+              <strong>health@petcorner.com</strong>
             </p>
           </section>
         </div>

@@ -1,6 +1,28 @@
 .main {
-  padding: 140px 5% 100px;
+  padding: 140px 24px 40px;
+  background-color: #f8fafc;
   min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary-green);
+  font-weight: 700;
+  text-decoration: none;
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+  transition: transform 0.2s;
+}
+
+.backBtn:hover {
+  transform: translateX(-4px);
 }
 
 .header {
@@ -87,74 +109,165 @@
   margin-bottom: 40px;
 }
 
+.filterTopBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
 .categoryTabs {
   display: flex;
   gap: 12px;
-  background: white;
-  padding: 8px;
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-}
-
-.tab {
-  padding: 12px 24px;
-  border-radius: 14px;
-  border: none;
-  background: none;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-  color: #64748b;
-}
-
-.tab.active {
-  background-color: var(--primary-green);
-  color: white;
-  box-shadow: 0 10px 20px rgba(46, 125, 50, 0.2);
-}
-
-.subFiltersRow {
-  display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-  max-width: 1200px;
-  width: 100%;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(10px);
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
-.targetFilter {
+.filterTab {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 1.5px solid #e2e8f0;
+  background: white;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filterTab:hover {
+  border-color: var(--primary-green);
+  color: var(--primary-green);
+}
+
+.filterTab.active {
+  background: var(--primary-green);
+  border-color: var(--primary-green);
+  color: white;
+  box-shadow: 0 4px 12px rgba(18, 185, 74, 0.2);
+}
+
+.filterToggleBtn {
   display: flex;
   align-items: center;
-  gap: 10px;
-  background: white;
+  gap: 8px;
   padding: 10px 20px;
-  border-radius: 14px;
+  border-radius: 20px;
+  border: 1.5px solid #e2e8f0;
+  background: white;
+  font-weight: 700;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filterToggleBtn:hover {
+  border-color: #1e293b;
+  background: #f8fafc;
+}
+
+/* ─── Filter Drawer ────────────────────────────────────────────── */
+.filterDrawerOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  animation: fadeIn 0.3s ease;
+}
+
+.filterDrawer {
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  background: white;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.1);
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.drawerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.drawerHeader h2 {
+  font-size: 1.5rem;
+  font-family: 'Outfit', sans-serif;
+  color: #1e293b;
+}
+
+.closeDrawerBtn {
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.drawerContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filterGroup label {
+  font-weight: 700;
+  color: #1e293b;
+  font-size: 0.95rem;
+}
+
+.filterGroup select {
+  padding: 12px 16px;
   border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
   color: #475569;
-  font-size: 0.9rem;
-  font-weight: 600;
+  background: #f8fafc;
+  outline: none;
+  cursor: pointer;
+}
+
+.filterGroup select:focus {
+  border-color: var(--primary-green);
+}
+
+.resetFiltersBtn {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1.5px solid #e2e8f0;
+  background: white;
+  border-radius: 12px;
+  font-weight: 700;
+  color: #1e293b;
+  cursor: pointer;
   transition: all 0.2s;
 }
 
-.targetFilter:hover {
-  border-color: var(--primary-green);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.targetFilter select {
-  border: none;
-  outline: none;
-  background: transparent;
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  color: #1e293b;
-  cursor: pointer;
+.resetFiltersBtn:hover {
+  background: #f1f5f9;
 }
 
 /* Request Section */
@@ -523,7 +636,7 @@
 }
 @media (max-width: 900px) {
   .main {
-    padding: 100px 16px 60px;
+    padding: 140px 16px 60px;
   }
   .header h1 {
     font-size: 2.5rem;

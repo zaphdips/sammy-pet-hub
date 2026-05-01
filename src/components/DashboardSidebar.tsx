@@ -24,10 +24,10 @@ import styles from "./DashboardSidebar.module.css";
 
 const menuItems = [
   { name: "Marketplace", icon: LayoutDashboard, path: "/dashboard" },
-  { name: "Pet Sales", icon: Dog, path: "/adoption" },
+  { name: "Find a Pet", icon: Dog, path: "/adoption" },
   { name: "The Shop", icon: ShoppingBag, path: "/shop" },
   { name: "Medication", icon: Pill, path: "/shop?category=medication" },
-  { name: "Mating Match", icon: Heart, path: "/mating" },
+  { name: "Breeding", icon: Heart, path: "/mating" },
   { name: "My Orders", icon: ClipboardList, path: "/profile/orders" },
   { name: "My Profile", icon: User, path: "/profile" },
   { name: "About Us", icon: Info, path: "/about" },
@@ -39,7 +39,7 @@ export default function DashboardSidebar() {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.logo}>
-        <span>🐾 Sammy Hub</span>
+        <span>🐾 Pet Corner</span>
       </div>
 
       <nav className={styles.nav}>

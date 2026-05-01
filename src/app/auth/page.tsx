@@ -9,7 +9,7 @@
  */
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { supabase, checkIsAdmin } from "@/lib/supabase";
 import { validateEmail, validatePassword } from "@/lib/validation";
 import { useRouter } from "next/navigation";
 import styles from "./Auth.module.css";
@@ -83,7 +83,12 @@ export default function AuthPage() {
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        router.push("/");
+        const isAdmin = await checkIsAdmin();
+        if (isAdmin) {
+          router.push("/admin");
+        } else {
+          router.push("/");
+        }
       }
     } catch (err: any) {
       // Map raw Supabase error to a friendly, non-technical message
@@ -111,7 +116,7 @@ export default function AuthPage() {
       <div className={`${styles.authCard} glass`}>
         <div className={styles.header}>
           <span className={styles.logo}>🐾</span>
-          <h2>{isSignUp ? "Join Sammy Hub" : "Welcome Back"}</h2>
+          <h2>{isSignUp ? "Join Pet Corner" : "Welcome Back"}</h2>
           <p>{isSignUp ? "Create your free account" : "Sign in to your account"}</p>
         </div>
 

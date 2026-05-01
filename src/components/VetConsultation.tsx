@@ -9,8 +9,8 @@ export default function VetConsultation() {
   const [petName, setPetName] = useState("");
   const [message, setMessage] = useState("");
   const [config, setConfig] = useState({
-    whatsapp: "2348000000000",
-    email: "vets@sammypethub.com",
+    whatsapp: "",
+    email: "",
     responseTime: "15min",
     expertCount: "50+"
   });

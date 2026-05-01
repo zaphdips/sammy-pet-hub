@@ -194,3 +194,143 @@
   color: var(--saas-text-muted);
   font-size: 1.2rem;
 }
+
+/* ── Workspace Header ── */
+.workspaceHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.workspaceHeader h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--saas-text-main);
+}
+
+.workspaceHeader p {
+  color: var(--saas-text-muted);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+/* ── Pill Tags ── */
+.pillLabel {
+  margin-right: 6px;
+}
+
+.parentTag {
+  color: var(--saas-text-muted);
+  font-size: 0.75rem;
+  margin-right: 8px;
+}
+
+.deletePill {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 4px;
+  transition: background 0.15s;
+  display: inline-flex;
+  align-items: center;
+}
+.deletePill:hover {
+  background: #fee2e2;
+}
+
+.empty {
+  font-size: 0.85rem;
+  color: var(--saas-text-muted);
+  font-style: italic;
+  padding: 10px 0;
+}
+
+/* ── Tooltip ── */
+.tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: var(--saas-text-muted);
+  cursor: help;
+}
+
+.tooltip .tooltipText {
+  visibility: hidden;
+  width: 140px;
+  background-color: var(--saas-text-main);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -70px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: none;
+}
+
+.tooltip .tooltipText::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--saas-text-main) transparent transparent transparent;
+}
+
+.tooltip:hover .tooltipText {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ── Help Banner ── */
+.helpBanner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  background-color: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  margin-top: 24px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ── Modal Overlay ── */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modalHeader button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--saas-text-muted);
+  transition: color 0.2s;
+}
+.modalHeader button:hover {
+  color: var(--saas-text-main);
+}

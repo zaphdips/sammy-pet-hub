@@ -1,5 +1,5 @@
 /**
- * Supabase client utilities for Sammy Pet Hub
+ * Supabase client utilities for Pet Corner
  *
  * WHY: We export a single shared client instance to avoid
  * creating multiple connections (N+1 connection leak risk).
@@ -19,7 +19,7 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 // Guard: fail loudly at startup if env vars are missing
 if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error(
-    "[Sammy Pet Hub] Missing Supabase environment variables. " +
+    "[Pet Corner] Missing Supabase environment variables. " +
     "Check NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local"
   );
 }
@@ -36,7 +36,7 @@ export function getSupabaseAdmin() {
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!serviceRoleKey) {
     throw new Error(
-      "[Sammy Pet Hub] SUPABASE_SERVICE_ROLE_KEY is not set. " +
+      "[Pet Corner] SUPABASE_SERVICE_ROLE_KEY is not set. " +
       "Add it to .env.local (never prefix with NEXT_PUBLIC_)."
     );
   }

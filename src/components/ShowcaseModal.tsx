@@ -12,6 +12,9 @@ import { createPortal } from "react-dom";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import { X, MessageCircle, ShoppingCart, ChevronLeft, ChevronRight, Info, CheckCircle } from "lucide-react";
+import { useCurrency } from "@/context/CurrencyContext";
+import { supabase } from "@/lib/supabase";
+import { useSiteSettings } from "@/lib/useSiteSettings";
 import styles from "./ShowcaseModal.module.css";
 
 type ShowcaseProps = {
@@ -33,11 +36,24 @@ export default function ShowcaseModal({ isOpen, onClose, data }: ShowcaseProps) 
   const [activeIndex, setActiveIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
   const { addToCart } = useCart();
+  const { formatPrice } = useCurrency();
+  const { settings } = useSiteSettings();
   const router = useRouter();
   
   useEffect(() => {
     setMounted(true);
     return () => setMounted(false);
+  }, []);
+
+  // Fetch fallback WhatsApp from admin settings
+  const [salesWhatsapp, setSalesWhatsapp] = useState("");
+  useEffect(() => {
+    supabase.from("site_settings").select("key, value").in("key", ["sales_whatsapp", "vet_whatsapp"])
+      .then(({ data }) => {
+        const sales = data?.find(s => s.key === "sales_whatsapp")?.value;
+        const vet = data?.find(s => s.key === "vet_whatsapp")?.value;
+        setSalesWhatsapp(sales || vet || "");
+      });
   }, []);
 
   if (!isOpen || !mounted) return null;
@@ -61,8 +77,13 @@ export default function ShowcaseModal({ isOpen, onClose, data }: ShowcaseProps) 
   const prevImg = () => setActiveIndex((prev) => (prev - 1 + images.length) % images.length);
 
   const handleWhatsApp = () => {
-    const text = encodeURIComponent(`Hi Sammy Pet Hub! I'm interested in ${data.name}. Can I get more details?`);
-    window.open(`https://wa.me/2348000000000?text=${text}`, "_blank"); // Replace with dynamic contact
+    const contact = (data as any).owner_contact || salesWhatsapp;
+    // Read the message template from site_settings, replace {name} with the item name.
+    // Falls back to a sensible default if the setting hasn't been configured yet.
+    const template = settings.whatsapp_inquiry_template || "Hi! I'm interested in {name}. Can I get more details?";
+    const message = template.replace("{name}", data.name);
+    const text = encodeURIComponent(message);
+    window.open(`https://wa.me/${contact}?text=${text}`, "_blank");
   };
 
   return createPortal(
@@ -110,8 +131,8 @@ export default function ShowcaseModal({ isOpen, onClose, data }: ShowcaseProps) 
               <h1>{data.name}</h1>
               {data.price && (
                 <div className={styles.priceArea}>
-                  <span className={styles.price}>₦{data.price}</span>
-                  {data.discount_price && <span className={styles.discount}>₦{data.discount_price}</span>}
+                  <span className={styles.price}>{formatPrice(parseFloat(data.price))}</span>
+                  {data.discount_price && <span className={styles.discount}>{formatPrice(parseFloat(data.discount_price))}</span>}
                 </div>
               )}
             </header>

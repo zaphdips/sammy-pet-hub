@@ -1,12 +1,25 @@
+/* ─────────────────────────────────────────────────────────────
+   Admin Settings — Tabbed Layout Styles
+   ───────────────────────────────────────────────────────────── */
+
 .container {
-  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 1100px;
 }
 
+/* ── Page Header ── */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
+}
+
+.titleBox {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .titleBox h1 {
@@ -19,117 +32,300 @@
 
 .titleBox p {
   color: var(--saas-text-muted);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
+  margin-top: 2px;
 }
 
-.refreshBtn {
+.titleBox svg {
+  color: var(--saas-accent);
+  flex-shrink: 0;
+}
+
+.headerActions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.refreshBtn,
+.previewBtn {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
-  background: white;
-  border: 1px solid var(--saas-border-bold);
+  padding: 10px 18px;
   border-radius: 8px;
   font-weight: 600;
-  color: var(--saas-text-main);
+  font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-size: 0.9rem;
+  text-decoration: none;
 }
 
+.refreshBtn {
+  background: white;
+  border: 1px solid var(--saas-border-bold);
+  color: var(--saas-text-main);
+}
 .refreshBtn:hover {
   background: var(--saas-bg);
 }
 
-.card {
-  background: white;
-  border-radius: 12px;
-  padding: 32px;
-  border: 1px solid var(--saas-border);
-  box-shadow: var(--saas-shadow);
+.previewBtn {
+  background: var(--saas-accent);
+  border: none;
+  color: white;
+}
+.previewBtn:hover {
+  opacity: 0.9;
 }
 
-.cardHeader {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 32px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--saas-border);
-}
-
-.cardHeader h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
+/* ── CTA Banner ── */
+.ctaBanner {
+  background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 10px;
+  padding: 14px 20px;
+  font-size: 0.9rem;
   color: var(--saas-text-main);
-  font-family: 'Outfit', sans-serif;
+  line-height: 1.6;
 }
 
-.settingsGrid {
+.ctaLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--saas-accent);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.ctaLink:hover {
+  border-bottom-color: var(--saas-accent);
+}
+
+/* ── Two-column layout: vertical tab nav + panel ── */
+.pageLayout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ── Vertical Tab Navigation ── */
+.tabNav {
+  background: white;
+  border: 1px solid var(--saas-border);
+  border-radius: 12px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 4px;
+  position: sticky;
+  top: 20px;
+}
+
+.tabBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--saas-text-muted);
+  text-align: left;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.tabBtn:hover {
+  background: var(--saas-bg);
+  color: var(--saas-text-main);
+}
+
+.tabBtn.tabActive {
+  background: var(--saas-bg);
+  color: var(--saas-text-main);
+  border-left: 3px solid var(--saas-accent);
+}
+
+.tabBtn.tabActive svg {
+  color: var(--saas-accent);
+}
+
+/* ── Settings Panel ── */
+.tabPanel {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--saas-border);
+  box-shadow: var(--saas-shadow);
+  overflow: hidden;
+}
+
+.panelHeader {
+  padding: 24px 32px;
+  border-bottom: 1px solid var(--saas-border);
+  background: var(--saas-bg);
+}
+
+.panelTitle {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.panelTitle svg {
+  color: var(--saas-accent);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.panelTitle h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  color: var(--saas-text-main);
+}
+
+.panelTitle p {
+  font-size: 0.85rem;
+  color: var(--saas-text-muted);
+  margin-top: 3px;
+  line-height: 1.5;
+}
+
+/* ── Settings List ── */
+.settingsList {
+  display: flex;
+  flex-direction: column;
 }
 
 .settingItem {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
+  gap: 32px;
+  align-items: start;
+  padding: 24px 32px;
+  border-bottom: 1px solid var(--saas-border);
+  transition: background 0.15s;
 }
 
+.settingItem:last-child {
+  border-bottom: none;
+}
+
+.settingItem:hover {
+  background: #fafafa;
+}
+
+/* Label + description */
 .labelBox label {
+  display: block;
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--saas-text-main);
-  display: block;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .labelBox p {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--saas-text-muted);
   line-height: 1.5;
 }
 
-.inputBox input {
+.missingNote {
+  color: #dc2626 !important;
+  font-weight: 600 !important;
+}
+
+/* Input area */
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inputBox input,
+.textarea {
   width: 100%;
   padding: 10px 14px;
   border-radius: 8px;
   border: 1px solid var(--saas-border-bold);
   background: white;
   color: var(--saas-text-main);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  font-family: inherit;
   outline: none;
   transition: all 0.2s;
+  resize: vertical;
 }
 
-.inputBox input:focus {
-  border-color: var(--saas-text-main);
-  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
+.inputBox input:focus,
+.textarea:focus {
+  border-color: var(--saas-accent);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
 }
 
+/* Per-key save status */
 .saveStatus {
-  font-size: 0.75rem;
-  color: var(--saas-text-muted);
+  font-size: 0.72rem;
   font-weight: 600;
-  text-align: right;
-  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 16px;
 }
 
+.save_idle    { color: var(--saas-text-muted); }
+.save_saving  { color: #f59e0b; }
+.save_saved   { color: var(--saas-accent); }
+.save_error   { color: #dc2626; }
+
+/* ── Footer ── */
 .footer {
-  margin-top: 40px;
   text-align: center;
   color: var(--saas-text-muted);
   font-size: 0.85rem;
   font-weight: 500;
+  padding-bottom: 16px;
 }
 
+/* ── Loading ── */
 .loader {
   padding: 100px;
   text-align: center;
   font-weight: 600;
   color: var(--saas-text-muted);
   font-size: 1.1rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .pageLayout {
+    grid-template-columns: 1fr;
+  }
+  .tabNav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: static;
+  }
+  .tabBtn {
+    flex: 1 1 120px;
+    justify-content: center;
+    text-align: center;
+  }
+  .settingItem {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
 }

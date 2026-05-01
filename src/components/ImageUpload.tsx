@@ -19,7 +19,7 @@ import { supabase } from "@/lib/supabase";
 import styles from "./ImageUpload.module.css";
 
 type Props = {
-  bucket: "pet-images" | "product-images" | "breed-images" | "content-images";
+  bucket: "pet-images" | "product-images" | "breed-images" | "content-images" | "promo-images";
   onUpload: (url: string) => void;
   existingUrl?: string;
   label?: string;

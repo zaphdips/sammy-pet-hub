@@ -14,13 +14,17 @@ import { validatePetForm, ALLOWED_GENDERS } from "@/lib/validation";
 import ImageUpload from "@/components/ImageUpload";
 import styles from "./PetsManagement.module.css";
 
-const EMPTY_FORM = { name: "", type: "dog", breed: "", age: "Puppy", gender: "Male", size: "Medium", description: "", photo_urls: [] as string[] };
+const EMPTY_FORM = { 
+  name: "", type: "dog", breed: "", age: "Puppy", gender: "Male", size: "Medium", description: "", photo_urls: [] as string[],
+  badge_text: "", rating: "5.0", is_verified_breeder: true
+};
 
 export default function PetsManagement() {
   const [pets, setPets] = useState<any[]>([]);
   const [options, setOptions] = useState<any[]>([]);
   const [isAdding, setIsAdding] = useState(false);
   const [formData, setFormData] = useState(EMPTY_FORM);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
 
@@ -50,23 +54,36 @@ export default function PetsManagement() {
     }
 
     setSaving(true);
-    const { error } = await supabase.from("pets").insert([{
+    const petData = {
       name: formData.name,
       type: formData.type,
       breed: formData.breed,
       age: formData.age,
       gender: formData.gender,
+      size: formData.size,
       description: formData.description,
       photo_urls: formData.photo_urls || [],
       photo_url: formData.photo_urls?.[0] || null,
-      is_available: true,
-    }]);
+      badge_text: formData.badge_text.trim() || null,
+      rating: parseFloat(formData.rating) || 5.0,
+      is_verified_breeder: formData.is_verified_breeder,
+    };
+
+    let error;
+    if (editingId) {
+      const res = await supabase.from("pets").update(petData).eq("id", editingId);
+      error = res.error;
+    } else {
+      const res = await supabase.from("pets").insert([{ ...petData, is_available: true }]);
+      error = res.error;
+    }
 
     if (error) {
       setErrors({ form: "Failed to save. Check your permissions." });
-      console.error("[Admin Pets] Insert error:", error.message);
+      console.error("[Admin Pets] Save error:", error.message);
     } else {
       setIsAdding(false);
+      setEditingId(null);
       setFormData(EMPTY_FORM);
       setErrors({});
       fetchPets();
@@ -74,30 +91,46 @@ export default function PetsManagement() {
     setSaving(false);
   };
 
+  const handleEdit = (pet: any) => {
+    setFormData({
+      ...EMPTY_FORM,
+      ...pet,
+      photo_urls: pet.photo_urls || (pet.photo_url ? [pet.photo_url] : []),
+      rating: pet.rating?.toString() || "5.0",
+    });
+    setEditingId(pet.id);
+    setIsAdding(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const toggleAvailability = async (id: string, current: boolean) => {
-    await supabase.from("pets").update({ is_available: !current }).eq("id", id);
+    const { error } = await supabase.from("pets").update({ is_available: !current }).eq("id", id);
+    if (error) alert("Failed to update status: " + error.message);
     fetchPets();
   };
 
   const deletePet = async (id: string, name: string) => {
     if (!window.confirm(`Are you sure you want to delete ${name}? This cannot be undone.`)) return;
     const { error } = await supabase.from("pets").delete().eq("id", id);
-    if (error) alert("Failed to delete.");
-    else fetchPets();
+    if (error) alert("Failed to delete pet: " + error.message);
+    fetchPets();
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>Manage Pet Listings</h1>
-        <button className={styles.addBtn} onClick={() => setIsAdding(!isAdding)}>
+        <button className={styles.addBtn} onClick={() => {
+          setIsAdding(!isAdding);
+          if (isAdding) { setEditingId(null); setFormData(EMPTY_FORM); }
+        }}>
           {isAdding ? "Cancel" : "+ Add New Pet"}
         </button>
       </div>
 
       {isAdding && (
         <form className={`${styles.form} glass`} onSubmit={handleSubmit}>
-          <h2>New Pet Listing</h2>
+          <h2>{editingId ? "Edit Pet Listing" : "New Pet Listing"}</h2>
 
           {/* Image upload — goes to Supabase Storage */}
           <div className={styles.imageGrid}>
@@ -177,6 +210,24 @@ export default function PetsManagement() {
                 ))}
               </select>
             </div>
+
+            <div className={styles.inputGroup}>
+              <label>Promo Badge Text</label>
+              <input type="text" value={formData.badge_text} onChange={(e) => setFormData({ ...formData, badge_text: e.target.value })} placeholder="e.g. 🐾 Pets Club Offer" />
+            </div>
+            
+            <div className={styles.inputGroup}>
+              <label>Average Rating (1.0 - 5.0)</label>
+              <input type="number" step="0.1" min="1" max="5" value={formData.rating} onChange={(e) => setFormData({ ...formData, rating: e.target.value })} />
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label>Verified Breeder?</label>
+              <select value={formData.is_verified_breeder ? "true" : "false"} onChange={(e) => setFormData({ ...formData, is_verified_breeder: e.target.value === "true" })}>
+                <option value="true">Yes, Verified</option>
+                <option value="false">No</option>
+              </select>
+            </div>
           </div>
 
           <div className={styles.inputGroup}>
@@ -193,7 +244,7 @@ export default function PetsManagement() {
           {errors.form && <div className={styles.formError}>{errors.form}</div>}
 
           <button type="submit" className={styles.saveBtn} disabled={saving}>
-            {saving ? "Saving..." : "Save Pet Listing"}
+            {saving ? "Saving..." : (editingId ? "Update Pet" : "Save Pet Listing")}
           </button>
         </form>
       )}
@@ -224,6 +275,12 @@ export default function PetsManagement() {
                 </td>
                 <td>
                   <div className={styles.rowActions}>
+                    <button
+                      className={styles.toggleBtn}
+                      onClick={() => handleEdit(pet)}
+                    >
+                      Edit
+                    </button>
                     <button
                       className={styles.toggleBtn}
                       onClick={() => toggleAvailability(pet.id, pet.is_available)}

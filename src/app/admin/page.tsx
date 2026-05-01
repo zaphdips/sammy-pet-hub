@@ -23,12 +23,14 @@ import {
   Package
 } from "lucide-react";
 import styles from "./Admin.module.css";
+import { useCurrency } from "@/context/CurrencyContext";
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({ pets: 0, products: 0, requests: 0, revenue: 0 });
   const [recentOrders, setRecentOrders] = useState<any[]>([]);
   const [settings, setSettings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const { formatPrice } = useCurrency();
 
   async function fetchData() {
     setLoading(true);
@@ -124,7 +126,7 @@ export default function AdminDashboard() {
             <CreditCard size={24} />
           </div>
           <div className={styles.statInfo}>
-            <h3>₦{stats.revenue.toLocaleString()}</h3>
+            <h3>{formatPrice(stats.revenue)}</h3>
             <span>Total Revenue</span>
           </div>
           <div className={styles.trend}>Live Sales</div>
@@ -176,7 +178,7 @@ export default function AdminDashboard() {
                   <tr key={order.id}>
                     <td>{order.profiles?.full_name || "Guest"}</td>
                     <td>{order.item_name.substring(0, 20)}...</td>
-                    <td>₦{order.price.toLocaleString()}</td>
+                    <td>{formatPrice(order.price)}</td>
                     <td>
                       <span className={`${styles.miniStatus} ${styles[order.status?.toLowerCase()]}`}>
                         {order.status}

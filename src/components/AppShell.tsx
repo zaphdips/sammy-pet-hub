@@ -19,6 +19,7 @@ import DashboardSidebar from "@/components/DashboardSidebar";
 import DashboardHeader from "@/components/DashboardHeader";
 import CartDrawer from "@/components/CartDrawer";
 import { CartProvider, useCart } from "@/context/CartContext";
+import { CurrencyProvider } from "@/context/CurrencyContext";
 import { ToastProvider } from "@/components/Toast";
 import styles from "./AppShell.module.css";
 
@@ -106,9 +107,11 @@ function ShellContent({ children }: { children: React.ReactNode }) {
 export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <ToastProvider>
-      <CartProvider>
-        <ShellContent>{children}</ShellContent>
-      </CartProvider>
+      <CurrencyProvider>
+        <CartProvider>
+          <ShellContent>{children}</ShellContent>
+        </CartProvider>
+      </CurrencyProvider>
     </ToastProvider>
   );
 }

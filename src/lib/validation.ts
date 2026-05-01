@@ -1,5 +1,5 @@
 /**
- * Input Validation Utilities for Sammy Pet Hub
+ * Input Validation Utilities for Pet Corner
  * 
  * WHY: Per AI Context, all user inputs must be validated and sanitized
  * before use in DB queries. This module centralises all validation

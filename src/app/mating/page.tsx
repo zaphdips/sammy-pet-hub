@@ -10,7 +10,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import Image from "next/image";
-import { Search, Filter, Plus, X, Heart, MapPin, Camera, Sparkles, ShieldCheck, ArrowRight } from "lucide-react";
+import { Search, Filter, Plus, X, Heart, MapPin, Camera, Sparkles, ShieldCheck, ArrowRight, ArrowLeft } from "lucide-react";
 import ImageUpload from "@/components/ImageUpload";
 import PetPedigreeDrawer from "@/components/PetPedigreeDrawer";
 import styles from "./Mating.module.css";
@@ -77,11 +77,15 @@ export default function MatingPage() {
 
   return (
     <main className={styles.main}>
-      <header className={styles.header}>
-        <div className={styles.badge}>Mating Matchmaker</div>
-        <h1 className="gradient-text">Find the Perfect Match</h1>
-        <p>Connect with other pet owners for responsible mating matchmaking.</p>
-      </header>
+      <div className={styles.container}>
+        <Link href="/" className={styles.backBtn}>
+          <ArrowLeft size={18} /> Back to Home
+        </Link>
+        <header className={styles.header}>
+          <div className={styles.badge}>Breeding</div>
+          <h1 className="gradient-text">Find the Perfect Match</h1>
+          <p>Connect with other pet owners for responsible mating matchmaking.</p>
+        </header>
 
       <div className={`${styles.filterBar} glass`}>
         <div className={styles.searchBox}>
@@ -186,7 +190,7 @@ export default function MatingPage() {
                <div className={styles.authTeaserIcon}>
                  <Sparkles size={60} color="var(--primary-green)" />
                </div>
-               <h2>Join the Sammy Hub!</h2>
+               <h2>Join Pet Corner!</h2>
                <p>To post your pet and find the perfect match, you need to be a verified member of our hub.</p>
                <div className={styles.benefits}>
                  <div className={styles.benefit}><ShieldCheck size={16} /> Verified Pet Profiles</div>
@@ -302,6 +306,7 @@ export default function MatingPage() {
           )}
         </div>
       )}
+      </div>
     </main>
   );
 }

@@ -175,9 +175,10 @@
 .tableWrapper {
   background: white;
   border-radius: 12px;
-  overflow: hidden;
+  overflow-x: auto;
   border: 1px solid var(--saas-border);
   box-shadow: var(--saas-shadow);
+  width: 100%;
 }
 
 .table {
@@ -237,7 +238,9 @@
 
 .rowActions {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
+  min-width: max-content;
 }
 
 .toggleBtn { 
@@ -250,6 +253,7 @@
   font-weight: 600;
   color: var(--saas-text-main);
   transition: all 0.2s;
+  white-space: nowrap;
 }
 
 .toggleBtn:hover { 
@@ -266,6 +270,7 @@
   font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 
 .deleteBtn:hover {

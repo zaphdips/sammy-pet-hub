@@ -1,12 +1,19 @@
+"use client";
+
+/**
+ * Privacy Policy
+ * Brand name and site URL are read from site_settings so the admin
+ * can update them from Admin → Settings → Brand & Identity.
+ */
+
 import { Shield, Lock, Eye, FileText, ClipboardCheck, Scale, Mail } from "lucide-react";
+import { useSiteSettings } from "@/lib/useSiteSettings";
 import styles from "./Legal.module.css";
 
-export const metadata = {
-  title: "Privacy Policy | Sammy Pet Hub",
-  description: "How Sammy Pet Hub collects, uses, and protects your personal data.",
-};
-
 export default function PrivacyPolicy() {
+  const { settings } = useSiteSettings();
+  const siteName = settings.site_name || "Pet Corner";
+  const siteUrl  = settings.site_url  || "petcorner.com";
   return (
     <main className={styles.main}>
       <div className={styles.container}>
@@ -22,8 +29,8 @@ export default function PrivacyPolicy() {
               <h2>1. Who We Are</h2>
             </div>
             <p>
-              Sammy Pet Hub ("we", "us", "our") operates the platform available at sammypethub.com. 
-              This policy explains how we collect and use your personal information in compliance 
+              {siteName} (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) operates the platform available at {siteUrl}.
+              This policy explains how we collect and use your personal information in compliance
               with the GDPR, NDPR (Nigeria Data Protection Regulation), and CCPA.
             </p>
           </section>
@@ -47,7 +54,7 @@ export default function PrivacyPolicy() {
               <h2>3. How We Use Your Data</h2>
             </div>
             <ul>
-              <li>To provide and personalise the Sammy Pet Hub service.</li>
+              <li>To provide and personalise the {siteName} service.</li>
               <li>To process adoption requests and connect you with breeders.</li>
               <li>To send account-related emails (confirmations, password resets).</li>
               <li>To comply with legal obligations.</li>
@@ -80,7 +87,7 @@ export default function PrivacyPolicy() {
               <li><strong>Portability</strong>: Export your data in a machine-readable format.</li>
               <li><strong>Object</strong>: Opt out of data processing for marketing.</li>
             </ul>
-            <p>To exercise any right, email us at <strong>privacy@sammypethub.com</strong>.</p>
+            <p>To exercise any right, email us at <strong>privacy@petcorner.com</strong>.</p>
           </section>
 
           <section className={styles.section}>
@@ -101,8 +108,8 @@ export default function PrivacyPolicy() {
               <h2>7. Contact</h2>
             </div>
             <p>
-              Data Controller: Sammy Pet Hub<br />
-              Email: privacy@sammypethub.com
+              Data Controller: {siteName}<br />
+              Email: privacy@{siteUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")}
             </p>
           </section>
         </div>

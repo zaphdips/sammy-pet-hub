@@ -1,12 +1,18 @@
+"use client";
+
+/**
+ * Terms of Use
+ * Brand name is read from site_settings so the admin can update it
+ * from Admin → Settings → Brand & Identity without a code deploy.
+ */
+
 import { CheckSquare, Users, FileDigit, AlertTriangle, Power, Gavel, Mail } from "lucide-react";
+import { useSiteSettings } from "@/lib/useSiteSettings";
 import styles from "../privacy/Legal.module.css";
 
-export const metadata = {
-  title: "Terms of Use | Sammy Pet Hub",
-  description: "Terms and conditions for using the Sammy Pet Hub platform.",
-};
-
 export default function TermsOfUse() {
+  const { settings } = useSiteSettings();
+  const siteName = settings.site_name || "Pet Corner";
   return (
     <main className={styles.main}>
       <div className={styles.container}>
@@ -21,7 +27,7 @@ export default function TermsOfUse() {
               <div className={styles.iconBox}><CheckSquare size={20} /></div>
               <h2>1. Acceptance of Terms</h2>
             </div>
-            <p>By accessing Sammy Pet Hub, you agree to these Terms. If you disagree, do not use the platform.</p>
+            <p>By accessing {siteName}, you agree to these Terms. If you disagree, do not use the platform.</p>
           </section>
 
           <section className={styles.section}>
@@ -44,8 +50,8 @@ export default function TermsOfUse() {
               <h2>3. User Content</h2>
             </div>
             <p>
-              You own the content you post. By posting, you grant Sammy Pet Hub a non-exclusive, 
-              royalty-free licence to display it on the platform. We reserve the right to remove 
+              You own the content you post. By posting, you grant {siteName} a non-exclusive,
+              royalty-free licence to display it on the platform. We reserve the right to remove
               content that violates these terms.
             </p>
           </section>
@@ -56,8 +62,8 @@ export default function TermsOfUse() {
               <h2>4. Liability Limits</h2>
             </div>
             <p>
-              Sammy Pet Hub acts as a platform connecting pet owners and breeders. We are not 
-              responsible for the conduct of users or the accuracy of listings. We are not liable 
+              {siteName} acts as a platform connecting pet owners and breeders. We are not
+              responsible for the conduct of users or the accuracy of listings. We are not liable
               for indirect or consequential damages arising from use of the platform.
             </p>
           </section>
@@ -83,7 +89,7 @@ export default function TermsOfUse() {
               <div className={styles.iconBox}><Mail size={20} /></div>
               <h2>7. Contact</h2>
             </div>
-            <p>legal@sammypethub.com</p>
+            <p>legal@petcorner.com</p>
           </section>
         </div>
       </div>

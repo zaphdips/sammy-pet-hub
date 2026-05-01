@@ -22,7 +22,7 @@ export default function MemberDashboard() {
   const [meds, setMeds] = useState<any[]>([]);
   const [toys, setToys] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [whatsapp, setWhatsapp] = useState("2348000000000");
+  const [whatsapp, setWhatsapp] = useState("");
 
   useEffect(() => {
     async function fetchData() {

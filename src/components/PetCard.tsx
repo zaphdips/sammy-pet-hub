@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useCart } from "@/context/CartContext";
+import { useCurrency } from "@/context/CurrencyContext";
 import { useRouter } from "next/navigation";
 import { Heart, Info, MapPin, X, Calendar, Dog } from "lucide-react";
 import styles from "./PetCard.module.css";
@@ -19,6 +20,9 @@ type PetCardProps = {
   photoUrl?: string;
   photo_urls?: string[];
   isAvailable: boolean;
+  rating?: number;
+  isVerifiedBreeder?: boolean;
+  badgeText?: string;
 };
 
 export default function PetCard({ 
@@ -33,10 +37,14 @@ export default function PetCard({
   description,
   photoUrl, 
   photo_urls,
-  isAvailable 
+  isAvailable,
+  rating,
+  isVerifiedBreeder,
+  badgeText
 }: PetCardProps) {
   const [showcaseOpen, setShowcaseOpen] = useState(false);
   const { addToCart } = useCart();
+  const { formatPrice } = useCurrency();
   const router = useRouter();
 
   const images = photo_urls && photo_urls.length > 0 ? photo_urls : (photoUrl ? [photoUrl] : []);
@@ -54,7 +62,7 @@ export default function PetCard({
   };
   return (
     <>
-      <div className={`${styles.card} glass`}>
+      <div className={styles.card}>
         <div className={styles.imageContainer}>
           {primaryImg ? (
             <img src={primaryImg} alt={name} className={styles.image} />
@@ -75,11 +83,19 @@ export default function PetCard({
         
         <div className={styles.content}>
           <div className={styles.header}>
-            <h3>{name}</h3>
-            <span className={styles.genderBadge}>{gender}</span>
+            <h3 className={styles.title}>{name}</h3>
+            {(rating !== undefined || isVerifiedBreeder) && (
+              <div className={styles.ratingRow}>
+                 {rating !== undefined && <span className={styles.stars}>{"★".repeat(Math.round(rating))}{"☆".repeat(5 - Math.round(rating))}</span>}
+                 {isVerifiedBreeder && <span className={styles.reviews}>Verified Breeder</span>}
+              </div>
+            )}
           </div>
           
-          <p className={styles.breedInfo}>{breed}</p>
+          <div className={styles.tagCloud}>
+            <span className={styles.tag}>Vaccinated</span>
+            <span className={styles.tag}>Health Checked</span>
+          </div>
           
           <div className={styles.traits}>
             <div className={styles.trait}>
@@ -92,27 +108,26 @@ export default function PetCard({
             </div>
           </div>
           
-          <div className={styles.priceRow}>
-            <span className={styles.priceLabel}>Price</span>
-            <span className={styles.priceValue}>₦{price.toLocaleString()}</span>
-          </div>
+          <div className={styles.footer}>
+            <div className={styles.pricing}>
+              <span className={styles.currentPrice}>{formatPrice(price)}</span>
+            </div>
 
-          <div className={styles.btnStack}>
-            <button 
-              className={styles.buyBtn}
-              disabled={!isAvailable}
-              onClick={handleBuyNow}
-            >
-              {isAvailable ? "Add to Cart" : "Sold"}
-            </button>
-            <button 
-              className={styles.detailsBtn} 
-              onClick={() => setShowcaseOpen(true)}
-            >
-               View Details & Gallery
-            </button>
+            {badgeText && (
+              <div className={styles.badgeWrapper}>
+                <span className={styles.easyRepeatBadge}>{badgeText}</span>
+              </div>
+            )}
           </div>
         </div>
+
+        <button 
+          className={styles.buyBtn}
+          disabled={!isAvailable}
+          onClick={handleBuyNow}
+        >
+          {isAvailable ? "Add to basket" : "Sold"}
+        </button>
       </div>
 
       <ShowcaseModal 

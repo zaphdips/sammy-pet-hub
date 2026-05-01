@@ -1,77 +1,193 @@
 .footer {
-  background-color: var(--text-dark);
-  color: #adb5bd;
-  padding: 60px 40px 30px;
-  margin-top: 80px;
+  background-color: var(--brand-footer);
+  color: white;
+  padding-top: 60px;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.5fr repeat(3, 1fr);
-  gap: 40px;
-  margin-bottom: 48px;
+  padding: 0 24px;
 }
 
-.brand span {
-  font-size: 1.3rem;
-  font-weight: 800;
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sectionHeader {
+  width: 100%;
+  padding: 24px 0;
+  background: none;
+  border: none;
   color: white;
-  font-family: 'Outfit', sans-serif;
-  display: block;
-  margin-bottom: 8px;
-}
-
-.brand p {
-  font-size: 0.85rem;
-  font-style: italic;
-  color: var(--primary-green);
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
 }
 
 .links {
-  display: contents;
-}
-
-.col {
+  height: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  transition: all 0.3s ease;
 }
 
-.col h4 {
+.links.open {
+  height: auto;
+  padding-bottom: 24px;
+}
+
+.links a {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.links a:hover {
   color: white;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 4px;
+  text-decoration: underline;
 }
 
-.col a {
-  font-size: 0.9rem;
-  transition: var(--transition-smooth);
+.brandSection {
+  padding: 60px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
-.col a:hover {
-  color: var(--primary-green);
+.logo {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  display: block;
 }
 
-.bottom {
+.brandInfo p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  max-width: 400px;
+  margin-bottom: 24px;
+}
+
+.socials {
+  display: flex;
+  gap: 20px;
+}
+
+.socials a {
+  color: white;
+  opacity: 0.7;
+  transition: var(--transition);
+}
+
+.socials a:hover {
+  opacity: 1;
+}
+
+.appSection p {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.appButtons {
+  display: flex;
+  gap: 16px;
+}
+
+.appButtons img {
+  height: 40px;
+  cursor: pointer;
+}
+
+.bottomBar {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 32px 0;
+}
+
+.bottomContainer {
   max-width: 1200px;
   margin: 0 auto;
-  padding-top: 24px;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 0 24px;
   display: flex;
-  justify-content: space-between;
-  font-size: 0.8rem;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  text-align: center;
 }
 
-@media (max-width: 768px) {
-  .container {
-    grid-template-columns: 1fr 1fr;
+.bottomContainer p {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.legalLinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.legalLinks a {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  transition: var(--transition);
+}
+
+.legalLinks a:hover {
+  color: white;
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+  .sections {
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
-  .bottom {
-    flex-direction: column;
-    gap: 8px;
+
+  .section {
+    border-top: none;
+    flex: 1;
+  }
+
+  .sectionHeader {
+    cursor: default;
+    padding-bottom: 16px;
+  }
+
+  .icon {
+    display: none;
+  }
+
+  .links {
+    height: auto;
+    overflow: visible;
+  }
+
+  .brandSection {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .bottomContainer {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
   }
 }

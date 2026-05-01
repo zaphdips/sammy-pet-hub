@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import PetCard from "@/components/PetCard";
-import { Search, Filter, Dog, Cat, Calendar, X, Send, PawPrint } from "lucide-react";
+import { Search, Filter, Dog, Cat, Calendar, X, Send, PawPrint, ArrowLeft } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import styles from "./Adoption.module.css";
+import Link from "next/link";
 import { useToast } from "@/components/Toast";
 
 export default function AdoptionPage() {
@@ -96,11 +97,15 @@ export default function AdoptionPage() {
 
   return (
     <main className={styles.main}>
-      <header className={styles.header}>
-        <span className={styles.badge}>Pet Sales</span>
-        <h1 className="gradient-text">Find Your New Best Friend</h1>
-        <p>Premium pets, health-checked and ready for their new homes.</p>
-      </header>
+      <div className={styles.container}>
+        <Link href="/" className={styles.backBtn}>
+          <ArrowLeft size={18} /> Back to Home
+        </Link>
+        <header className={styles.header}>
+          <span className={styles.badge}>Find a Pet</span>
+          <h1 className="gradient-text">Find Your New Best Friend</h1>
+          <p>Premium pets, health-checked and ready for their new homes.</p>
+        </header>
 
       <div className={`${styles.filterBar} glass`}>
         <div className={styles.searchBox}>
@@ -286,6 +291,7 @@ export default function AdoptionPage() {
           </div>
         </div>
       )}
+      </div>
     </main>
   );
 }

@@ -10,8 +10,9 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import ProductCard from "@/components/ProductCard";
-import { ShoppingBag, Filter, Sparkles, Pill, Plus, X, PackageSearch } from "lucide-react";
+import { ShoppingBag, Filter, Sparkles, Pill, Plus, X, PackageSearch, ArrowLeft } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
+import Link from "next/link";
 import styles from "./Shop.module.css";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/components/Toast";
@@ -35,6 +36,7 @@ export default function ShopPage() {
   const [categories, setCategories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [isRequestModal, setRequestModal] = useState(false);
+  const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
 
   useEffect(() => {
     setSearch(searchParams.get("search") || "");
@@ -80,13 +82,17 @@ export default function ShopPage() {
 
   return (
     <main className={styles.main}>
-      <header className={styles.header}>
-        <div className={styles.badge}>Official Shop</div>
-        <h1 className="gradient-text">Pet Care Essentials</h1>
-        <p>Expertly curated toys, premium medication, and accessories for your companions.</p>
-      </header>
+      <div className={styles.container}>
+        <Link href="/" className={styles.backBtn}>
+          <ArrowLeft size={18} /> Back to Home
+        </Link>
+        <header className={styles.header}>
+          <div className={styles.badge}>Official Shop</div>
+          <h1 className="gradient-text">Pet Care Essentials</h1>
+          <p>Expertly curated toys, premium medication, and accessories for your companions.</p>
+        </header>
 
-      <div className={styles.filterContainer}>
+      <div className={styles.filterTopBar}>
         <div className={styles.categoryTabs}>
           {categories.map((c) => (
             <button 
@@ -98,74 +104,101 @@ export default function ShopPage() {
             </button>
           ))}
         </div>
+        <button className={styles.filterToggleBtn} onClick={() => setIsFilterDrawerOpen(true)}>
+          <Filter size={18} /> Filters
+        </button>
+      </div>
 
-        <div className={styles.subFiltersRow}>
-          {/* Universal Target Pet Filter */}
-          <div className={styles.targetFilter}>
-            <Filter size={16} />
-            <select value={targetPet} onChange={(e) => setTargetPet(e.target.value)}>
-              <option value="all">For All Pets</option>
-              <option value="dog">For Dogs Only</option>
-              <option value="cat">For Cats Only</option>
-              <option value="bird">For Birds Only</option>
-            </select>
-          </div>
-
-          {/* Manufacturers (Universal) */}
-          <div className={styles.targetFilter}>
-            <select value={manufacturer} onChange={(e) => setManufacturer(e.target.value)}>
-              <option value="all">All Brands</option>
-              {options.filter(o => o.table_name === 'product_manufacturers').map(opt => (
-                <option key={opt.id} value={opt.option_value}>{opt.option_label}</option>
-              ))}
-            </select>
-          </div>
-
-          {/* Medication Specific Filters */}
-          {filter === 'medication' && (
-            <>
-              <div className={styles.targetFilter}>
-                <select value={medForm} onChange={(e) => setMedForm(e.target.value)}>
-                  <option value="all">Any Form (Pill/Liquid)</option>
-                  {options.filter(o => o.table_name === 'product_med_forms').map(opt => (
-                    <option key={opt.id} value={opt.option_value}>{opt.option_label}</option>
-                  ))}
-                </select>
-              </div>
-              <div className={styles.targetFilter}>
-                <select value={healthBenefit} onChange={(e) => setHealthBenefit(e.target.value)}>
-                  <option value="all">Any Benefit</option>
-                  {options.filter(o => o.table_name === 'product_health_benefits').map(opt => (
-                    <option key={opt.id} value={opt.option_value}>{opt.option_label}</option>
-                  ))}
-                </select>
-              </div>
-            </>
-          )}
-
-          {/* Toy Specific Filters */}
-          {filter === 'toy' && (
-            <div className={styles.targetFilter}>
-              <select value={toyMaterial} onChange={(e) => setToyMaterial(e.target.value)}>
-                <option value="all">Any Material</option>
-                {options.filter(o => o.table_name === 'product_toy_materials').map(opt => (
-                  <option key={opt.id} value={opt.option_value}>{opt.option_label}</option>
-                ))}
-              </select>
+      {isFilterDrawerOpen && (
+        <div className={styles.filterDrawerOverlay} onClick={() => setIsFilterDrawerOpen(false)}>
+          <div className={`${styles.filterDrawer} glass`} onClick={e => e.stopPropagation()}>
+            <div className={styles.drawerHeader}>
+              <h2>Filters</h2>
+              <button className={styles.closeDrawerBtn} onClick={() => setIsFilterDrawerOpen(false)}>
+                <X size={24} />
+              </button>
             </div>
-          )}
+            
+            <div className={styles.drawerContent}>
+              <div className={styles.filterGroup}>
+                <label>Target Pet</label>
+                <select value={targetPet} onChange={(e) => setTargetPet(e.target.value)}>
+                  <option value="all">For All Pets</option>
+                  <option value="dog">For Dogs Only</option>
+                  <option value="cat">For Cats Only</option>
+                  <option value="bird">For Birds Only</option>
+                </select>
+              </div>
 
-          {/* Sub-Categories (Depends on Main Category) */}
-          <div className={styles.targetFilter}>
-            <select value={subCat} onChange={(e) => setSubCat(e.target.value)}>
-              <option value="all">Any Type</option>
-              {categories.filter(c => c.parent_category === filter).map(cat => (
-                <option key={cat.id} value={cat.slug}>{cat.name}</option>
-              ))}
-            </select>
+              <div className={styles.filterGroup}>
+                <label>Manufacturer / Brand</label>
+                <select value={manufacturer} onChange={(e) => setManufacturer(e.target.value)}>
+                  <option value="all">All Brands</option>
+                  {options.filter(o => o.table_name === 'product_manufacturers').map(opt => (
+                    <option key={opt.id} value={opt.option_value}>{opt.option_label}</option>
+                  ))}
+                </select>
+              </div>
+
+              {filter === 'medication' && (
+                <>
+                  <div className={styles.filterGroup}>
+                    <label>Medication Form</label>
+                    <select value={medForm} onChange={(e) => setMedForm(e.target.value)}>
+                      <option value="all">Any Form</option>
+                      {options.filter(o => o.table_name === 'product_med_forms').map(opt => (
+                        <option key={opt.id} value={opt.option_value}>{opt.option_label}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className={styles.filterGroup}>
+                    <label>Health Benefit</label>
+                    <select value={healthBenefit} onChange={(e) => setHealthBenefit(e.target.value)}>
+                      <option value="all">Any Benefit</option>
+                      {options.filter(o => o.table_name === 'product_health_benefits').map(opt => (
+                        <option key={opt.id} value={opt.option_value}>{opt.option_label}</option>
+                      ))}
+                    </select>
+                  </div>
+                </>
+              )}
+
+              {filter === 'toy' && (
+                <div className={styles.filterGroup}>
+                  <label>Material</label>
+                  <select value={toyMaterial} onChange={(e) => setToyMaterial(e.target.value)}>
+                    <option value="all">Any Material</option>
+                    {options.filter(o => o.table_name === 'product_toy_materials').map(opt => (
+                      <option key={opt.id} value={opt.option_value}>{opt.option_label}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
+              <div className={styles.filterGroup}>
+                <label>Specific Type</label>
+                <select value={subCat} onChange={(e) => setSubCat(e.target.value)}>
+                  <option value="all">All Types</option>
+                  {categories.filter(c => c.parent_category === filter).map(cat => (
+                    <option key={cat.id} value={cat.slug}>{cat.name}</option>
+                  ))}
+                </select>
+              </div>
+              
+              <button 
+                className={styles.resetFiltersBtn}
+                onClick={() => {
+                  setTargetPet("all"); setSubCat("all"); setManufacturer("all");
+                  setMedForm("all"); setToyMaterial("all"); setHealthBenefit("all");
+                  setIsFilterDrawerOpen(false);
+                }}
+              >
+                Reset Filters
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {loading ? (
         <div className={styles.skeletonGrid}>
@@ -185,12 +218,15 @@ export default function ShopPage() {
           {products.map((product) => (
             <ProductCard 
               key={product.id}
+              id={product.id}
               name={product.name}
               category={product.category}
               price={product.price}
               discountPrice={product.discount_price}
-              photoUrl={product.photo_url}
+              photoUrl={product.photo_url || product.photo_urls?.[0]}
               description={product.description}
+              isSoldOut={product.is_sold_out || product.stock_count <= 0}
+              stockCount={product.stock_count}
               onBuy={(p) => addToCart(p)}
             />
           ))}
@@ -280,6 +316,7 @@ export default function ShopPage() {
           </div>
         </div>
       )}
+      </div>
     </main>
   );
 }

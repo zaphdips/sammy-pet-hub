@@ -1,215 +1,172 @@
 "use client";
 
-/**
- * Premium Home Page (Overhaul)
- * 
- * WHY: Replaces the basic hero and sections with high-end glassmorphism,
- * Lucide icons, and dynamic spacing.
- */
-
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
-import { ArrowRight, ShieldCheck, Heart, Stethoscope, ShoppingBag, Zap } from "lucide-react";
+import { ArrowRight, ShieldCheck, Heart, Stethoscope, ShoppingBag, Star, Plus, Minus } from "lucide-react";
 import Image from "next/image";
-import BreedCarousel from "@/components/BreedCarousel";
-import SymptomGuide from "@/components/SymptomGuide";
-import VetConsultation from "@/components/VetConsultation";
+import Link from "next/link";
+import styles from "./Home.module.css";
 import PetCard from "@/components/PetCard";
 import ProductCard from "@/components/ProductCard";
-import { useRouter } from "next/navigation";
-import styles from "./Home.module.css";
-import Link from "next/link";
+import { useCart } from "@/context/CartContext";
+import PromoCard from "@/components/PromoCard";
+import ScrollCarousel from "@/components/ScrollCarousel";
+import { useSiteSettings } from "@/lib/useSiteSettings";
 
 export default function Home() {
-  const router = useRouter();
-  const [user, setUser] = useState<any>(null);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [redirecting, setRedirecting] = useState(false);
+  const { addToCart } = useCart();
+  const { settings } = useSiteSettings();
   const [previewPets, setPreviewPets] = useState<any[]>([]);
   const [previewProducts, setPreviewProducts] = useState<any[]>([]);
-  const [settings, setSettings] = useState<any>({
-    hero_tagline: "Get Your FUR-ever Companion",
-    hero_subtitle: "Connect with breeders, find accessories, and get vet support."
-  });
+  const [promotions, setPromotions] = useState<any[]>([]);
+
+  // Read limits from site_settings (with numeric fallbacks)
+  const petLimit     = parseInt(settings.homepage_pet_limit     || "4",  10);
+  const productLimit = parseInt(settings.homepage_product_limit || "4",  10);
+  const promoLimit   = parseInt(settings.homepage_promo_limit   || "3",  10);
 
   useEffect(() => {
-    // Auth & Redirect Check
-    async function checkSession() {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        setRedirecting(true);
-        router.push("/dashboard");
-        return; // Don't render the page for logged-in users
-      }
-      setUser(null);
-      setIsAdmin(false);
-    }
-    checkSession();
+    const fetchPreviews = async () => {
+      const { data: pets }  = await supabase.from("pets").select("*").limit(petLimit);
+      const { data: prods } = await supabase.from("products").select("*").limit(productLimit);
+      const { data: promos } = await supabase
+        .from("promotions")
+        .select("*")
+        .eq("is_active", true)
+        .order("sort_order", { ascending: true })
+        .limit(promoLimit);
+      
+      const mockPets = [
+        { id: "m1", name: "Bella", breed: "Golden Retriever", age: "Puppy", gender: "Female", price: 250000, isAvailable: true, photo_urls: ["https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=800"] },
+        { id: "m2", name: "Max", breed: "German Shepherd", age: "Adult", gender: "Male", price: 180000, isAvailable: true, photo_urls: ["https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?auto=format&fit=crop&q=80&w=800"] },
+        { id: "m3", name: "Luna", breed: "Persian Cat", age: "Kitten", gender: "Female", price: 120000, isAvailable: true, photo_urls: ["https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=800"] },
+        { id: "m4", name: "Charlie", breed: "French Bulldog", age: "Puppy", gender: "Male", price: 300000, isAvailable: true, photo_urls: ["https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=800"] },
+      ];
 
-    async function fetchPreviews() {
-      const [pRes, prodRes] = await Promise.all([
-        supabase.from("pets").select("*").eq("is_available", true).limit(4),
-        supabase.from("products").select("*").eq("is_active", true).limit(4)
-      ]);
-      if (pRes.data) setPreviewPets(pRes.data);
-      if (prodRes.data) setPreviewProducts(prodRes.data);
-    }
+      const mockProds = [
+        { id: "p1", name: "Premium Dog Kibble", category: "Food", price: 15000, photoUrl: "https://images.unsplash.com/photo-1585499193151-0f50d54c4e1c?auto=format&fit=crop&q=80&w=800", description: "High-protein formula for active breeds." },
+        { id: "p2", name: "Orthopedic Pet Bed", category: "Accessories", price: 25000, photoUrl: "https://images.unsplash.com/photo-1591584539339-a4e215943920?auto=format&fit=crop&q=80&w=800", description: "Memory foam comfort for your pet's joints." },
+        { id: "p3", name: "Interactive Cat Toy", category: "Toys", price: 4500, photoUrl: "https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&q=80&w=800", description: "Keep your feline engaged for hours." },
+        { id: "p4", name: "Pet Shampoo & Conditioner", category: "Grooming", price: 8000, photoUrl: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&q=80&w=800", description: "Organic ingredients for a shiny coat." },
+      ];
+
+      const mockPromos = [
+        { id: "promo1", title: "New pet? You've got this.", description: "All they need, plus 10% off your first shop when you join Pets Club.", button_text: "Shop essentials", button_link: "/shop", image_url: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&q=80&w=1000" },
+        { id: "promo2", title: "Picnic days are here", description: "Playful toys, tasty treats & days out essentials.", button_text: "Shop now", button_link: "/shop", image_url: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=1000" },
+        { id: "promo3", title: "The bank holiday feeling", description: "Enjoy savings on pet accessories for the whole month.", button_text: "Shop now", button_link: "/shop", image_url: "https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&q=80&w=1000" }
+      ];
+
+      // Merge DB results with fallback seed data so the page is never empty
+      // (Fallback is only shown when the DB tables are empty during development)
+      setPreviewPets(pets && pets.length > 0 ? [...pets, ...mockPets].slice(0, petLimit) : mockPets.slice(0, petLimit));
+      setPreviewProducts(prods && prods.length > 0 ? [...prods, ...mockProds].slice(0, productLimit) : mockProds.slice(0, productLimit));
+      setPromotions(promos && promos.length > 0 ? promos : mockPromos.slice(0, promoLimit));
+    };
     fetchPreviews();
-
-    async function fetchSettings() {
-      // Only fetch the two keys we actually use — not the entire table
-      const { data } = await supabase
-        .from("site_settings")
-        .select("key, value")
-        .in("key", ["hero_tagline", "hero_subtitle"]);
-      if (data) {
-        const s = { ...settings };
-        data.forEach(item => {
-          if (item.key === "hero_tagline") s.hero_tagline = item.value;
-          if (item.key === "hero_subtitle") s.hero_subtitle = item.value;
-        });
-        setSettings(s);
-      }
-    }
-    fetchSettings();
-  }, [router]);
-
-  // Don't flash the homepage while redirecting a logged-in user
-  if (redirecting) return null;
-
-  const features = [
-    { title: "Secure Adoption", icon: Heart, color: "#ef4444", desc: "Verified breeders and health-guaranteed pets." },
-    { title: "Premium Shop", icon: ShoppingBag, color: "#3b82f6", desc: "Top-tier accessories and medication for your pets." },
-    { title: "Vet Assistance", icon: Stethoscope, color: "#10b981", desc: "24/7 support from certified veterinarians." },
-    { title: "Verified Health", icon: ShieldCheck, color: "#f59e0b", desc: "Comprehensive health records for every animal." },
-  ];
+  }, [petLimit, productLimit, promoLimit]);
 
   return (
     <main className={styles.main}>
-      {/* Hero Section */}
-      <section className={styles.hero}>
-        <div className={styles.heroContent}>
-          <div className={styles.heroBadge}>
-            <Zap size={14} />
-            <span>Over 5,000+ pets matched</span>
-          </div>
-          <h1>{settings.hero_tagline}</h1>
-          <p>{settings.hero_subtitle}</p>
-          <div className={styles.heroActions}>
-            {isAdmin ? (
-              <Link href="/admin" className={styles.primaryBtn}>
-                Go to Dashboard <ArrowRight size={20} />
-              </Link>
-            ) : user ? (
-              <Link href="/adoption" className={styles.primaryBtn}>
-                Find Your Pet <ArrowRight size={20} />
-              </Link>
-            ) : (
-              <Link href="/auth" className={styles.primaryBtn}>
-                Join the Hub <ArrowRight size={20} />
-              </Link>
-            )}
-            
-            {user ? (
-              <Link href="/profile" className={styles.secondaryBtn}>
-                My Profile
-              </Link>
-            ) : (
-              <Link href="/shop" className={styles.secondaryBtn}>
-                Shop Accessories
-              </Link>
-            )}
-          </div>
+      {/* Split Hero Banner */}
+      <section className={styles.heroSplit}>
+        <div className={styles.heroText}>
+          <h1>The ultimate corner for your furry family.</h1>
+          <p>Connecting verified breeders, premium supplies, and expert vet care all in one place. Your pet's happiness starts here.</p>
+          <Link href="/auth" className={styles.primaryCTA}>
+            Start Your Journey <ArrowRight size={20} />
+          </Link>
         </div>
-        <div className={styles.heroVisual}>
-          <div className={styles.imageContainer}>
-            <Image 
-              src="/banners/hero.png" 
-              alt="Happy Pets" 
-              fill 
-              className={styles.heroImage} 
-              priority 
+        <div className={styles.heroImageContainer}>
+          <Image 
+            src="/banners/pet-corner-hero.png" 
+            alt="Happy pets" 
+            fill 
+            className={styles.heroImg}
+            priority
+          />
+        </div>
+      </section>
+
+      {/* Trust Ribbon */}
+      <section className={styles.trustRibbon}>
+        <div className={styles.trustItem}><ShieldCheck size={18} /> Verified Breeders</div>
+        <div className={styles.trustItem}><Heart size={18} /> Health Guaranteed</div>
+        <div className={styles.trustItem}><Stethoscope size={18} /> 24/7 Vet Support</div>
+        <div className={styles.trustItem}><ShoppingBag size={18} /> Premium Supplies</div>
+      </section>
+
+      {/* Featured Products Section (Moved up) */}
+      <section className={styles.featuredSection}>
+        <div className={styles.sectionHeading}>
+          <h2>Shop the Best for Your Pets</h2>
+          <p>Explore our premium selection of toys and healthcare products.</p>
+        </div>
+        <ScrollCarousel>
+          {previewProducts.map(product => (
+            <ProductCard 
+              key={product.id} 
+              {...product} 
+              photoUrl={product.photo_url || product.photoUrl || product.photo_urls?.[0]} 
+              onBuy={(p) => addToCart(p)} 
+              rating={product.rating ?? 5.0}
+              reviewCount={product.review_count ?? 0}
+              badgeText={product.badge_text || ""}
             />
-            <div className={styles.imageOverlay}></div>
-          </div>
-          <div className={styles.floatingCard}>
-            <Heart size={24} color="#ef4444" fill="#ef4444" />
-            <span>Adoption Ready</span>
-          </div>
-        </div>
+          ))}
+        </ScrollCarousel>
+        <Link href="/shop" className={styles.outlineCTA}>Visit the Shop</Link>
       </section>
 
-      {/* Features Section */}
-      <section className={styles.features}>
-        <div className={styles.featuresGrid}>
-          {features.map((f, i) => (
-            <div key={i} className={`${styles.featureCard} glass`}>
-              <div className={styles.featureIcon} style={{ color: f.color, backgroundColor: `${f.color}15` }}>
-                <f.icon size={28} />
-              </div>
-              <h3>{f.title}</h3>
-              <p>{f.desc}</p>
-            </div>
+      {/* Promo Feature Cards */}
+      <section className={styles.promoSection}>
+        <div className={styles.promoGrid}>
+          {promotions.map((promo) => (
+            <PromoCard 
+              key={promo.id}
+              title={promo.title}
+              description={promo.description}
+              buttonText={promo.button_text}
+              buttonLink={promo.button_link}
+              imageUrl={promo.image_url}
+            />
           ))}
         </div>
       </section>
-      
-      {/* 1. FEATURED PETS PREVIEW */}
-      <section className={styles.previewSection}>
-        <div className={styles.sectionHeader}>
-          <span className={styles.subTitle}>Available Right Now</span>
-          <h2>Newest Pet Arrivals</h2>
-          <p>Meet our newest furry friends looking for their permanent homes.</p>
+
+      {/* Newest Arrivals Grid */}
+      <section className={`${styles.featuredSection} ${styles.offWhiteBg}`}>
+        <div className={styles.sectionHeading}>
+          <h2>Newest Arrivals</h2>
+          <p>Meet our latest furry friends looking for their permanent homes.</p>
         </div>
-        <div className={styles.previewGrid}>
+        <ScrollCarousel>
           {previewPets.map(pet => (
-            <PetCard key={pet.id} {...pet} photoUrl={pet.photo_url} isAvailable={pet.is_available} />
+            <PetCard 
+              key={pet.id} 
+              {...pet} 
+              photoUrl={pet.photo_url} 
+              isAvailable={pet.is_available}
+              rating={pet.rating ?? 4.5}
+              isVerifiedBreeder={pet.is_verified_breeder ?? false}
+              badgeText={pet.badge_text || ""}
+            />
           ))}
-        </div>
-        <div className={styles.centerCTA}>
-           <Link href="/adoption" className={styles.outlineBtn}>View All Pets <ArrowRight size={18} /></Link>
-        </div>
+        </ScrollCarousel>
+        <Link href="/adoption" className={styles.outlineCTA}>View All Pets</Link>
       </section>
 
-      {/* 2. FEATURED PRODUCTS PREVIEW */}
-      <section className={styles.previewSection}>
-        <div className={styles.sectionHeader}>
-          <span className={styles.subTitle}>Essential Supplies</span>
-          <h2>Trending in the Shop</h2>
-          <p>Top-rated toys, medications, and accessories for your companions.</p>
+      {/* Final CTA Section */}
+      <section className={styles.featuredSection} style={{ background: "var(--brand-primary)", color: "white" }}>
+        <div className={styles.sectionHeading}>
+          <h2 style={{ color: "white" }}>Ready to give a pet<br />a forever home?</h2>
+          <p style={{ color: "rgba(255,255,255,0.7)" }}>Join Pet Corner today and become part of our growing community of happy pet owners.</p>
         </div>
-        <div className={styles.previewGrid}>
-          {previewProducts.map(prod => (
-            <ProductCard key={prod.id} {...prod} />
-          ))}
-        </div>
-        <div className={styles.centerCTA}>
-           <Link href="/shop" className={styles.outlineBtn}>Explore Full Shop <ArrowRight size={18} /></Link>
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "32px" }}>
+          <Link href="/auth" className={styles.primaryCTA} style={{ background: "white", color: "var(--brand-primary)" }}>
+            Get Started Now
+          </Link>
         </div>
       </section>
-
-      {/* Encyclopedia Section */}
-      <section className={styles.contentSection}>
-        <div className={styles.sectionHeader}>
-          <span className={styles.subTitle}>Knowledge Base</span>
-          <h2>Breed Encyclopedia</h2>
-          <p>Learn about different breeds, their temperaments, and care needs.</p>
-        </div>
-        <BreedCarousel />
-      </section>
-
-      {/* Health Section */}
-      <section className={styles.healthSection}>
-        <div className={styles.sectionHeader}>
-          <span className={styles.subTitle}>Pet Health</span>
-          <h2>Symptom Checker</h2>
-          <p>Quick guide to understanding your pet's behavior and health signs.</p>
-        </div>
-        <SymptomGuide />
-      </section>
-
-      {/* Vet Section */}
-      <VetConsultation />
     </main>
   );
 }

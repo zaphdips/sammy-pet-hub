@@ -2,7 +2,7 @@ import { Truck, RotateCcw, Package, AlertCircle, Clock, Mail, ShieldCheck } from
 import styles from "../privacy/Legal.module.css";
 
 export const metadata = {
-  title: "Shipping & Returns | Sammy Pet Hub",
+  title: "Shipping & Returns | Pet Corner",
   description: "Shipping logistics and return policies for pets and products.",
 };
 
@@ -88,7 +88,7 @@ export default function ShippingPage() {
             </div>
             <p>
               For shipping status or return requests, please email:<br />
-              <strong>support@sammypethub.com</strong>
+              <strong>support@petcorner.com</strong>
             </p>
           </section>
         </div>

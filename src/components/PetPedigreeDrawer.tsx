@@ -85,7 +85,7 @@ export default function PetPedigreeDrawer({ isOpen, onClose, pet }: {
              <a href={`https://wa.me/${pet.owner_contact}`} target="_blank" className={styles.contactBtn}>
                Request Match Interview
              </a>
-             <p>Member communication is secured by Sammy Hub.</p>
+             <p>Member communication is secured by Pet Corner.</p>
           </div>
         </div>
       </div>

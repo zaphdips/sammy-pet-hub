@@ -1,0 +1,418 @@
+/* ─────────────────────────────────────────────────────────────
+   Admin Promotions — Styles
+   Reuses the same SaaS design language as the rest of the admin.
+   ───────────────────────────────────────────────────────────── */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 1100px;
+}
+
+/* ── Page Header ── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.titleBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.titleBox svg {
+  color: var(--saas-accent);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.titleBox h1 {
+  font-size: 1.8rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  color: var(--saas-text-main);
+  letter-spacing: -0.02em;
+}
+
+.titleBox p {
+  color: var(--saas-text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 3px;
+}
+
+.inlineLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--saas-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+.inlineLink:hover { text-decoration: underline; }
+
+/* ── Add Button ── */
+.addBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  background: var(--saas-text-main);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.addBtn:hover { opacity: 0.85; }
+
+/* ── Info Banner ── */
+.infoBanner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 0.88rem;
+  color: #1e40af;
+  line-height: 1.6;
+}
+
+.infoBanner svg { flex-shrink: 0; margin-top: 2px; }
+
+/* ── Add Form ── */
+.form {
+  background: white;
+  border: 1px solid var(--saas-border);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form h2 {
+  font-size: 1.2rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  color: var(--saas-text-main);
+  border-bottom: 1px solid var(--saas-border);
+  padding-bottom: 16px;
+}
+
+.imageSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.imageSection label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--saas-text-main);
+}
+
+.imagePreview {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--saas-border);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputGroup label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--saas-text-main);
+}
+
+.optional {
+  font-weight: 400;
+  color: var(--saas-text-muted);
+  font-size: 0.78rem;
+}
+
+.inputGroup input,
+.inputGroup select,
+.inputGroup textarea {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--saas-border-bold);
+  background: white;
+  color: var(--saas-text-main);
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.2s;
+  resize: vertical;
+}
+
+.inputGroup input:focus,
+.inputGroup select:focus,
+.inputGroup textarea:focus {
+  border-color: var(--saas-accent);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+}
+
+.error {
+  font-size: 0.78rem;
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.formError {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.saveBtn {
+  padding: 13px 32px;
+  background: var(--saas-accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  align-self: flex-start;
+}
+.saveBtn:hover:not(:disabled) { opacity: 0.88; }
+.saveBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Table ── */
+.tableWrapper {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--saas-border);
+  box-shadow: var(--saas-shadow);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: left;
+  font-size: 0.72rem;
+  color: var(--saas-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--saas-border);
+  font-weight: 700;
+  white-space: nowrap;
+  background: var(--saas-bg);
+}
+
+.table td {
+  padding: 14px 16px;
+  font-size: 0.88rem;
+  color: var(--saas-text-main);
+  border-bottom: 1px solid var(--saas-border);
+  vertical-align: middle;
+}
+
+.table tr:last-child td { border-bottom: none; }
+.table tr:hover td { background: #fafafa; }
+
+.expiredRow td { opacity: 0.55; }
+
+/* Thumbnail */
+.thumb {
+  width: 72px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--saas-border);
+}
+
+.noImage {
+  display: inline-block;
+  width: 72px;
+  height: 48px;
+  background: var(--saas-bg);
+  border-radius: 6px;
+  border: 1px dashed var(--saas-border-bold);
+  font-size: 0.72rem;
+  color: var(--saas-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Badge */
+.badge {
+  display: inline-block;
+  background: var(--saas-accent);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-left: 8px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.promoDesc {
+  font-size: 0.78rem;
+  color: var(--saas-text-muted);
+  margin-top: 3px;
+}
+
+.promoLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--saas-accent);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.promoLink:hover { text-decoration: underline; }
+
+.centerCell { text-align: center; }
+
+/* Expiry states */
+.expiredTag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #dc2626;
+  background: #fee2e2;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.noExpiry {
+  font-size: 0.8rem;
+  color: var(--saas-text-muted);
+}
+
+/* Status pills */
+.statusActive {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #dcfce7;
+  color: #15803d;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.statusDraft {
+  display: inline-block;
+  padding: 4px 10px;
+  background: var(--saas-bg);
+  color: var(--saas-text-muted);
+  border: 1px solid var(--saas-border);
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Row action buttons */
+.rowActions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.toggleBtn,
+.deleteBtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.toggleBtn {
+  background: white;
+  border-color: var(--saas-border-bold);
+  color: var(--saas-text-main);
+}
+.toggleBtn:hover {
+  background: var(--saas-bg);
+}
+
+.deleteBtn {
+  background: white;
+  border-color: #fecaca;
+  color: #dc2626;
+}
+.deleteBtn:hover {
+  background: #fef2f2;
+}
+
+/* ── Empty State ── */
+.emptyState {
+  text-align: center;
+  padding: 80px 40px;
+  background: white;
+  border: 2px dashed var(--saas-border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: var(--saas-text-muted);
+}
+
+.emptyState svg { opacity: 0.3; }
+
+.emptyState h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--saas-text-main);
+}
+
+.emptyState p {
+  font-size: 0.9rem;
+  max-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .formGrid { grid-template-columns: 1fr; }
+  .header { flex-direction: column; align-items: flex-start; }
+}

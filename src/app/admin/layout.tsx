@@ -21,14 +21,18 @@ import {
   LogOut,
   Menu,
   X,
-  Truck
+  Truck,
+  Megaphone,
 } from "lucide-react";
 import Link from "next/link";
 import styles from "./AdminLayout.module.css";
+import { useSiteSettings } from "@/lib/useSiteSettings";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [status, setStatus] = useState<"loading" | "authorized" | "unauthorized">("loading");
   const [isSidebarOpen, setSidebarOpen] = useState(true);
+  const { settings } = useSiteSettings();
+  const siteName = settings.site_name || "Pet Corner";
   const router = useRouter();
   const pathname = usePathname();
 
@@ -53,13 +57,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   const navItems = [
-    { name: "Dashboard", icon: LayoutDashboard, path: "/admin" },
-    { name: "Pets", icon: Dog, path: "/admin/pets" },
-    { name: "Inventory", icon: ShoppingBag, path: "/admin/products" },
-    { name: "Orders", icon: Truck, path: "/admin/orders" },
-    { name: "Filters", icon: Settings, path: "/admin/filters" },
-    { name: "Illness Guide", icon: BookOpen, path: "/admin/illnesses" },
-    { name: "Breed Info", icon: Users, path: "/admin/breeds" },
+    { name: "Dashboard",    icon: LayoutDashboard, path: "/admin" },
+    { name: "Pets",         icon: Dog,             path: "/admin/pets" },
+    { name: "Inventory",    icon: ShoppingBag,     path: "/admin/products" },
+    { name: "Orders",       icon: Truck,           path: "/admin/orders" },
+    { name: "Promotions",   icon: Megaphone,       path: "/admin/promotions" },
+    { name: "Content",      icon: BookOpen,        path: "/admin/content" },
+    { name: "Filters",      icon: Settings,        path: "/admin/filters" },
+    { name: "Illness Guide",icon: BookOpen,        path: "/admin/illnesses" },
+    { name: "Breed Info",   icon: Users,           path: "/admin/breeds" },
   ];
 
   return (
@@ -73,7 +79,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className={styles.sidebarHeader}>
           <div className={styles.logoBox}>🐾</div>
           <div className={styles.headerText}>
-            <h3>Sammy Admin</h3>
+            <h3>{siteName} Admin</h3>
             <span className={styles.statusBadge}>System Online</span>
           </div>
         </div>

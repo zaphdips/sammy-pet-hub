@@ -1,0 +1,157 @@
+/* ─────────────────────────────────────────────────────────────
+   Admin Content — Extra styles for the FAQ/About block editor.
+   The main table styles come from PetsManagement.module.css.
+   ───────────────────────────────────────────────────────────── */
+
+/* CTA banner (same style as Settings page) */
+.ctaBanner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 0.88rem;
+  color: #1e40af;
+  line-height: 1.6;
+}
+
+.ctaBanner svg { flex-shrink: 0; margin-top: 2px; }
+
+.ctaLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: #1d4ed8;
+  font-weight: 700;
+  text-decoration: none;
+}
+.ctaLink:hover { text-decoration: underline; }
+
+/* Inline-editable block list (for FAQ & About tabs) */
+.blockList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.blockCard {
+  display: grid;
+  grid-template-columns: 48px 1fr 40px;
+  gap: 16px;
+  align-items: start;
+  background: white;
+  border: 1px solid var(--saas-border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--saas-shadow);
+  transition: box-shadow 0.2s;
+}
+
+.blockCard:hover {
+  box-shadow: var(--saas-shadow-md);
+}
+
+/* Sort order controls */
+.blockOrder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-top: 4px;
+}
+
+.blockOrder button {
+  background: var(--saas-bg);
+  border: 1px solid var(--saas-border);
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--saas-text-muted);
+  transition: all 0.15s;
+}
+
+.blockOrder button:hover:not(:disabled) {
+  background: var(--saas-text-main);
+  color: white;
+  border-color: var(--saas-text-main);
+}
+
+.blockOrder button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.blockOrder span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--saas-text-muted);
+}
+
+/* Block fields */
+.blockFields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.blockField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.blockField label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--saas-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.blockInput,
+.blockTextarea {
+  width: 100%;
+  padding: 9px 13px;
+  border-radius: 8px;
+  border: 1px solid var(--saas-border-bold);
+  background: white;
+  color: var(--saas-text-main);
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  resize: vertical;
+}
+
+.blockInput:focus,
+.blockTextarea:focus {
+  border-color: var(--saas-accent);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+}
+
+/* Delete button */
+.deleteBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  background: white;
+  color: #dc2626;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.deleteBtn:hover {
+  background: #fef2f2;
+}
